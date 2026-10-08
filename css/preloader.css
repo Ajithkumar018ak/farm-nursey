@@ -1,0 +1,1835 @@
+/* =========================================================
+   VERDANT — FARM PRELOADER
+   SEED → SUN → CRACK → ROOTS → PLANT → LEAVES → FADE
+========================================================= */
+
+:root {
+    --preloader-green: #14251a;
+    --preloader-deep: #08110c;
+    --preloader-leaf: #7ca66d;
+    --preloader-leaf-light: #b5cf91;
+    --preloader-soil: #4a2f1d;
+    --preloader-soil-dark: #2a1b12;
+    --preloader-soil-mid: #68452c;
+    --preloader-sand: #8a6040;
+    --preloader-sun: #f4c96b;
+    --preloader-white: #f5f2e8;
+    --preloader-muted: rgba(245, 242, 232, 0.55);
+}
+
+
+/* =========================================================
+   MAIN PRELOADER
+========================================================= */
+
+.farm-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(67, 102, 63, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #07110b 0%,
+            #0b1710 48%,
+            #08100b 100%
+        );
+
+    overflow: hidden;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 1s cubic-bezier(0.77, 0, 0.18, 1),
+        visibility 1s ease;
+}
+
+
+/* Final state */
+
+.farm-preloader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SCENE
+========================================================= */
+
+.preloader-scene {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    perspective: 1400px;
+    transform-style: preserve-3d;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.scene-glow {
+    position: absolute;
+
+    width: min(55vw, 760px);
+    height: min(55vw, 760px);
+
+    left: 50%;
+    top: 44%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(115, 160, 93, 0.18) 0%,
+            rgba(74, 112, 65, 0.08) 35%,
+            transparent 70%
+        );
+
+    filter: blur(5px);
+
+    opacity: 0;
+
+    animation:
+        sceneGlowIn 1.4s ease 0.15s forwards,
+        sceneGlowPulse 3.8s ease-in-out 1.5s infinite;
+}
+
+
+@keyframes sceneGlowIn {
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes sceneGlowPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(0.94);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+
+}
+
+
+/* =========================================================
+   SUN
+========================================================= */
+
+.preloader-sun {
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    left: 50%;
+    top: 29%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    z-index: 3;
+
+    transition:
+        transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.7s ease;
+}
+
+
+/* JS state */
+
+.preloader-sun.is-visible {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+
+.sun-core {
+    position: absolute;
+
+    width: 58px;
+    height: 58px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff4bd 0%,
+            #f4d477 35%,
+            #e5a94f 72%,
+            #b86f2e 100%
+        );
+
+    box-shadow:
+        0 0 25px rgba(244, 201, 107, 0.7),
+        0 0 70px rgba(244, 201, 107, 0.28),
+        0 0 130px rgba(244, 201, 107, 0.12);
+
+    animation: sunPulse 2.8s ease-in-out infinite;
+}
+
+
+@keyframes sunPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(0.94);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.06);
+    }
+
+}
+
+
+/* =========================================================
+   SUN RAYS
+========================================================= */
+
+.sun-ray {
+    position: absolute;
+
+    width: 2px;
+    height: 23px;
+
+    left: 50%;
+    top: 50%;
+
+    transform-origin: center 75px;
+
+    border-radius: 100px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(244, 201, 107, 0),
+            rgba(244, 201, 107, 0.9)
+        );
+
+    opacity: 0.7;
+}
+
+
+.ray-01 {
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.ray-02 {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ray-03 {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.ray-04 {
+    transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.ray-05 {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.ray-06 {
+    transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.ray-07 {
+    transform: translate(-50%, -50%) rotate(270deg);
+}
+
+.ray-08 {
+    transform: translate(-50%, -50%) rotate(315deg);
+}
+
+
+/* =========================================================
+   SOIL PARTICLES
+========================================================= */
+
+.soil-particles {
+    position: absolute;
+
+    left: 50%;
+    top: 59%;
+
+    width: 520px;
+    height: 300px;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+.soil-particles span {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: rgba(145, 104, 69, 0.7);
+
+    opacity: 0;
+
+    animation:
+        soilFloat 4s ease-in-out infinite;
+}
+
+
+.soil-particles span:nth-child(1) {
+    left: 7%;
+    top: 50%;
+    animation-delay: 0.2s;
+}
+
+.soil-particles span:nth-child(2) {
+    left: 15%;
+    top: 67%;
+    animation-delay: 0.8s;
+}
+
+.soil-particles span:nth-child(3) {
+    left: 23%;
+    top: 37%;
+    animation-delay: 1.2s;
+}
+
+.soil-particles span:nth-child(4) {
+    left: 31%;
+    top: 75%;
+    animation-delay: 0.5s;
+}
+
+.soil-particles span:nth-child(5) {
+    left: 39%;
+    top: 25%;
+    animation-delay: 1.8s;
+}
+
+.soil-particles span:nth-child(6) {
+    left: 48%;
+    top: 65%;
+    animation-delay: 0.9s;
+}
+
+.soil-particles span:nth-child(7) {
+    left: 56%;
+    top: 29%;
+    animation-delay: 1.5s;
+}
+
+.soil-particles span:nth-child(8) {
+    left: 65%;
+    top: 72%;
+    animation-delay: 0.4s;
+}
+
+.soil-particles span:nth-child(9) {
+    left: 73%;
+    top: 40%;
+    animation-delay: 1.1s;
+}
+
+.soil-particles span:nth-child(10) {
+    left: 82%;
+    top: 62%;
+    animation-delay: 2s;
+}
+
+.soil-particles span:nth-child(11) {
+    left: 89%;
+    top: 31%;
+    animation-delay: 0.7s;
+}
+
+.soil-particles span:nth-child(12) {
+    left: 95%;
+    top: 69%;
+    animation-delay: 1.6s;
+}
+
+
+@keyframes soilFloat {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 15px, 0) scale(0.5);
+    }
+
+    35% {
+        opacity: 0.7;
+    }
+
+    65% {
+        opacity: 0.4;
+        transform: translate3d(0, -14px, 0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   SEED WORLD
+========================================================= */
+
+.seed-world {
+    position: absolute;
+
+    left: 50%;
+    top: 57%;
+
+    width: 430px;
+    height: 330px;
+
+    transform:
+        translate(-50%, -50%)
+        rotateX(8deg);
+
+    transform-style: preserve-3d;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   SOIL PLATFORM
+========================================================= */
+
+.soil-platform {
+    position: absolute;
+
+    width: 390px;
+    height: 175px;
+
+    left: 50%;
+    top: 58%;
+
+    transform:
+        translate(-50%, -50%)
+        rotateX(48deg)
+        rotateZ(0deg);
+
+    transform-style: preserve-3d;
+
+    filter:
+        drop-shadow(0 25px 28px rgba(0, 0, 0, 0.4));
+}
+
+
+/* =========================================================
+   SOIL TOP
+========================================================= */
+
+.soil-top {
+    position: absolute;
+
+    width: 100%;
+    height: 105px;
+
+    left: 0;
+    top: 0;
+
+    transform: translateZ(1px);
+
+    border-radius: 50% 50% 18% 18%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            #775238 0%,
+            #5b3b27 38%,
+            #3b271a 75%,
+            #24170f 100%
+        );
+
+    box-shadow:
+        inset 0 4px 8px rgba(255, 255, 255, 0.06),
+        inset 0 -8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   GRASS
+========================================================= */
+
+.soil-grass {
+    position: absolute;
+
+    bottom: 15px;
+
+    width: 2px;
+    height: 12px;
+
+    border-radius: 100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--preloader-leaf-light),
+            #45693d
+        );
+
+    transform-origin: bottom center;
+}
+
+
+.grass-01 {
+    left: 17%;
+    transform: rotate(-18deg);
+}
+
+.grass-02 {
+    left: 31%;
+    height: 16px;
+    transform: rotate(14deg);
+}
+
+.grass-03 {
+    left: 51%;
+    height: 13px;
+    transform: rotate(-7deg);
+}
+
+.grass-04 {
+    left: 69%;
+    height: 17px;
+    transform: rotate(19deg);
+}
+
+.grass-05 {
+    left: 83%;
+    transform: rotate(-15deg);
+}
+
+
+/* =========================================================
+   SOIL STONES
+========================================================= */
+
+.soil-stone {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #87634a,
+            #493122
+        );
+
+    box-shadow:
+        inset 1px 1px 2px rgba(255, 255, 255, 0.12);
+}
+
+
+.stone-01 {
+    width: 9px;
+    height: 6px;
+
+    left: 24%;
+    top: 34%;
+}
+
+.stone-02 {
+    width: 6px;
+    height: 4px;
+
+    left: 67%;
+    top: 28%;
+}
+
+.stone-03 {
+    width: 7px;
+    height: 5px;
+
+    left: 56%;
+    top: 58%;
+}
+
+
+/* =========================================================
+   SOIL FRONT
+========================================================= */
+
+.soil-front {
+    position: absolute;
+
+    width: 100%;
+    height: 80px;
+
+    left: 0;
+    top: 76px;
+
+    transform:
+        translateZ(-1px)
+        rotateX(-48deg)
+        translateY(41px);
+
+    transform-origin: top center;
+
+    border-radius: 0 0 22px 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #5a3a25 0%,
+            #3b271a 48%,
+            #21150e 100%
+        );
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 10px 14px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   SOIL LAYERS
+========================================================= */
+
+.soil-layer {
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 1px;
+
+    opacity: 0.35;
+}
+
+
+.layer-one {
+    top: 24px;
+    background: #9a6c48;
+}
+
+.layer-two {
+    top: 45px;
+    background: #765035;
+}
+
+.layer-three {
+    top: 63px;
+    background: #563822;
+}
+
+
+/* =========================================================
+   SOIL SIDES
+========================================================= */
+
+.soil-left,
+.soil-right {
+    position: absolute;
+
+    width: 50px;
+    height: 80px;
+
+    top: 76px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #4b3020,
+            #21150e
+        );
+}
+
+
+.soil-left {
+    left: -18px;
+
+    transform:
+        skewY(32deg)
+        rotateX(-48deg);
+    
+    transform-origin: right top;
+
+    border-radius: 0 0 0 15px;
+}
+
+
+.soil-right {
+    right: -18px;
+
+    transform:
+        skewY(-32deg)
+        rotateX(-48deg);
+
+    transform-origin: left top;
+
+    border-radius: 0 0 15px 0;
+}
+
+
+/* =========================================================
+   SEED CONTAINER
+========================================================= */
+
+.seed-container {
+    position: absolute;
+
+    left: 50%;
+    top: 42%;
+
+    width: 92px;
+    height: 110px;
+
+    transform:
+        translate(-50%, -50%)
+        translateZ(35px)
+        scale(1);
+
+    z-index: 10;
+
+    transition:
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.6s ease;
+}
+
+
+/* =========================================================
+   SEED GLOW
+========================================================= */
+
+.seed-glow {
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(213, 171, 91, 0.20),
+            transparent 68%
+        );
+
+    filter: blur(5px);
+
+    animation: seedGlow 2.4s ease-in-out infinite;
+}
+
+
+@keyframes seedGlow {
+
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+}
+
+
+/* =========================================================
+   SEED BODY
+========================================================= */
+
+.seed {
+    position: absolute;
+
+    width: 47px;
+    height: 67px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-12deg);
+
+    border-radius:
+        58% 42% 55% 45% /
+        48% 45% 55% 52%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c99954 0%,
+            #9c6936 35%,
+            #684020 72%,
+            #402613 100%
+        );
+
+    box-shadow:
+        inset 6px 5px 8px rgba(255, 255, 255, 0.14),
+        inset -8px -10px 15px rgba(0, 0, 0, 0.3),
+        0 12px 25px rgba(0, 0, 0, 0.4);
+
+    transform-origin: center bottom;
+
+    transition:
+        transform 0.8s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+
+/* =========================================================
+   SEED LINE / CRACK
+========================================================= */
+
+.seed-line {
+    position: absolute;
+
+    width: 2px;
+    height: 76%;
+
+    left: 50%;
+    top: 12%;
+
+    transform:
+        translateX(-50%)
+        rotate(6deg);
+
+    border-radius: 100px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 226, 159, 0.1),
+            rgba(255, 226, 159, 0.75) 48%,
+            rgba(255, 226, 159, 0.08)
+        );
+
+    opacity: 0.6;
+}
+
+
+/* =========================================================
+   SEED DETAIL
+========================================================= */
+
+.seed-detail {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    left: 14px;
+    top: 19px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 218, 148, 0.25);
+
+    box-shadow:
+        18px 29px 0 rgba(255, 218, 148, 0.12),
+        5px 43px 0 rgba(255, 218, 148, 0.08);
+}
+
+
+/* =========================================================
+   SEED CRACKED STATE
+========================================================= */
+
+.seed-container.is-cracked .seed {
+    transform:
+        translate(-50%, -50%)
+        rotate(-12deg)
+        scaleY(0.88)
+        scaleX(1.08);
+}
+
+
+.seed-container.is-cracked .seed-line {
+    opacity: 1;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            #f7dda1 35%,
+            #fff0c2 50%,
+            #f7dda1 65%,
+            transparent
+        );
+
+    box-shadow:
+        0 0 9px rgba(244, 201, 107, 0.5);
+}
+
+
+/* =========================================================
+   ROOTS
+========================================================= */
+
+.preloader-roots {
+    position: absolute;
+
+    width: 300px;
+    height: 180px;
+
+    left: 50%;
+    top: 49%;
+
+    transform:
+        translate(-50%, -50%)
+        translateZ(10px);
+
+    z-index: 7;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+
+.preloader-roots svg {
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+
+.preloader-roots path {
+    fill: none;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+.root-main {
+    stroke: #c39a66;
+    stroke-width: 3;
+
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+
+    filter:
+        drop-shadow(0 0 3px rgba(195, 154, 102, 0.25));
+}
+
+
+.root-branch {
+    stroke: #9d744b;
+    stroke-width: 2;
+
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+}
+
+
+/* roots visible */
+
+.preloader-roots.is-visible {
+    opacity: 1;
+}
+
+
+.preloader-roots.is-visible .root-main {
+    animation:
+        rootGrow 1.2s
+        cubic-bezier(0.65, 0, 0.35, 1)
+        forwards;
+}
+
+
+.preloader-roots.is-visible .root-branch {
+    animation:
+        branchGrow 0.75s
+        cubic-bezier(0.65, 0, 0.35, 1)
+        forwards;
+}
+
+
+.preloader-roots.is-visible .root-branch-01 {
+    animation-delay: 0.35s;
+}
+
+.preloader-roots.is-visible .root-branch-02 {
+    animation-delay: 0.48s;
+}
+
+.preloader-roots.is-visible .root-branch-03 {
+    animation-delay: 0.62s;
+}
+
+.preloader-roots.is-visible .root-branch-04 {
+    animation-delay: 0.72s;
+}
+
+.preloader-roots.is-visible .root-branch-05 {
+    animation-delay: 0.86s;
+}
+
+.preloader-roots.is-visible .root-branch-06 {
+    animation-delay: 0.96s;
+}
+
+
+@keyframes rootGrow {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+@keyframes branchGrow {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+/* =========================================================
+   PLANT
+========================================================= */
+
+.preloader-plant {
+    position: absolute;
+
+    width: 240px;
+    height: 260px;
+
+    left: 50%;
+    top: 24%;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(45px)
+        scale(0.25);
+
+    transform-origin: center bottom;
+
+    opacity: 0;
+
+    z-index: 12;
+
+    pointer-events: none;
+
+    transition:
+        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.7s ease;
+}
+
+
+.preloader-plant svg {
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+
+/* plant stem */
+
+.plant-stem {
+    fill: none;
+
+    stroke: #6f9b5d;
+    stroke-width: 6;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+}
+
+
+/* leaves */
+
+.plant-leaf {
+    fill:
+        url("#plantGradient");
+
+    fill: #6f9b5d;
+
+    transform-box: fill-box;
+    transform-origin: center bottom;
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(0 5px 8px rgba(0, 0, 0, 0.25));
+}
+
+
+/* plant visible */
+
+.preloader-plant.is-visible {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(0)
+        scale(1);
+}
+
+
+.preloader-plant.is-visible .plant-stem {
+    animation:
+        stemGrow 1.4s
+        cubic-bezier(0.65, 0, 0.35, 1)
+        forwards;
+}
+
+
+@keyframes stemGrow {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+/* =========================================================
+   LEAF OPEN ANIMATIONS
+========================================================= */
+
+.preloader-plant.is-visible .leaf-left {
+    animation:
+        leafOpenLeft 0.85s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        0.75s forwards;
+}
+
+
+.preloader-plant.is-visible .leaf-right {
+    animation:
+        leafOpenRight 0.85s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        0.95s forwards;
+}
+
+
+.preloader-plant.is-visible .leaf-left-top {
+    animation:
+        leafOpenLeftTop 0.8s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        1.15s forwards;
+}
+
+
+.preloader-plant.is-visible .leaf-right-top {
+    animation:
+        leafOpenRightTop 0.8s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        1.35s forwards;
+}
+
+
+@keyframes leafOpenLeft {
+
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(18deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+
+@keyframes leafOpenRight {
+
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-18deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+
+@keyframes leafOpenLeftTop {
+
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(25deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+
+@keyframes leafOpenRightTop {
+
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-25deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+
+/* =========================================================
+   SEED PARTICLES
+========================================================= */
+
+.seed-particles {
+    position: absolute;
+
+    width: 260px;
+    height: 220px;
+
+    left: 50%;
+    top: 43%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 15;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+
+.seed-particles span {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #d7c486,
+            #7e6841
+        );
+
+    opacity: 0;
+}
+
+
+.seed-particles span:nth-child(1) {
+    left: 48%;
+    top: 50%;
+}
+
+.seed-particles span:nth-child(2) {
+    left: 48%;
+    top: 50%;
+}
+
+.seed-particles span:nth-child(3) {
+    left: 48%;
+    top: 50%;
+}
+
+.seed-particles span:nth-child(4) {
+    left: 48%;
+    top: 50%;
+}
+
+.seed-particles span:nth-child(5) {
+    left: 48%;
+    top: 50%;
+}
+
+.seed-particles span:nth-child(6) {
+    left: 48%;
+    top: 50%;
+}
+
+
+.seed-particles.is-active {
+    opacity: 1;
+}
+
+
+.seed-particles.is-active span:nth-child(1) {
+    animation: seedBurstOne 1s ease-out forwards;
+}
+
+.seed-particles.is-active span:nth-child(2) {
+    animation: seedBurstTwo 1s ease-out forwards;
+}
+
+.seed-particles.is-active span:nth-child(3) {
+    animation: seedBurstThree 1s ease-out forwards;
+}
+
+.seed-particles.is-active span:nth-child(4) {
+    animation: seedBurstFour 1s ease-out forwards;
+}
+
+.seed-particles.is-active span:nth-child(5) {
+    animation: seedBurstFive 1s ease-out forwards;
+}
+
+.seed-particles.is-active span:nth-child(6) {
+    animation: seedBurstSix 1s ease-out forwards;
+}
+
+
+@keyframes seedBurstOne {
+
+    to {
+        opacity: 0;
+        transform: translate(-62px, -54px) scale(0);
+    }
+
+}
+
+@keyframes seedBurstTwo {
+
+    to {
+        opacity: 0;
+        transform: translate(70px, -42px) scale(0);
+    }
+
+}
+
+@keyframes seedBurstThree {
+
+    to {
+        opacity: 0;
+        transform: translate(-82px, 15px) scale(0);
+    }
+
+}
+
+@keyframes seedBurstFour {
+
+    to {
+        opacity: 0;
+        transform: translate(78px, 23px) scale(0);
+    }
+
+}
+
+@keyframes seedBurstFive {
+
+    to {
+        opacity: 0;
+        transform: translate(-35px, 62px) scale(0);
+    }
+
+}
+
+@keyframes seedBurstSix {
+
+    to {
+        opacity: 0;
+        transform: translate(40px, 64px) scale(0);
+    }
+
+}
+
+
+/* =========================================================
+   LOADER COPY
+========================================================= */
+
+.loader-copy {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8%;
+
+    transform: translateX(-50%);
+
+    width: min(360px, calc(100% - 40px));
+
+    text-align: center;
+
+    z-index: 30;
+
+    color: var(--preloader-white);
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.loader-eyebrow {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.30em;
+
+    color:
+        rgba(181, 207, 145, 0.78);
+}
+
+
+/* =========================================================
+   LOADER MESSAGE
+========================================================= */
+
+.loader-copy p {
+    margin: 0 0 17px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 17px;
+    font-weight: 400;
+
+    letter-spacing: 0.01em;
+
+    color:
+        rgba(245, 242, 232, 0.88);
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.loader-progress {
+    position: relative;
+
+    width: 100%;
+    height: 1px;
+
+    margin: 0 auto 12px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    overflow: hidden;
+}
+
+
+.loader-progress-bar {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 0%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #58764e,
+            #b4cb8f,
+            #e0d59b
+        );
+
+    box-shadow:
+        0 0 8px rgba(180, 203, 143, 0.4);
+
+    transition:
+        width 0.15s linear;
+}
+
+
+/* =========================================================
+   PERCENTAGE
+========================================================= */
+
+.loader-percentage {
+    display: block;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
+
+    color:
+        rgba(245, 242, 232, 0.48);
+}
+
+
+/* =========================================================
+   3D SCENE DEPTH
+========================================================= */
+
+.seed-world,
+.soil-platform,
+.seed-container,
+.preloader-roots,
+.preloader-plant {
+    transform-style: preserve-3d;
+}
+
+
+/* =========================================================
+   INITIAL SCENE MOTION
+========================================================= */
+
+.seed-world {
+    animation:
+        worldEnter 1.5s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        0.15s both;
+}
+
+
+@keyframes worldEnter {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            rotateX(18deg)
+            translateY(40px)
+            scale(0.78);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            rotateX(8deg)
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   WORLD ROTATION BEFORE FADE
+========================================================= */
+
+.seed-world.is-rotating {
+    animation:
+        worldRotateOut 1.2s
+        cubic-bezier(0.77, 0, 0.18, 1)
+        forwards;
+}
+
+
+@keyframes worldRotateOut {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            rotateX(8deg)
+            rotateY(0deg)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            rotateX(20deg)
+            rotateY(18deg)
+            rotateZ(-3deg)
+            scale(0.88);
+    }
+
+}
+
+
+/* =========================================================
+   SCENE FINAL EXIT
+========================================================= */
+
+.preloader-scene.is-exiting {
+    animation:
+        sceneExit 1s
+        cubic-bezier(0.77, 0, 0.18, 1)
+        forwards;
+}
+
+
+@keyframes sceneExit {
+
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.035);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .preloader-sun {
+        width: 120px;
+        height: 120px;
+
+        top: 27%;
+    }
+
+
+    .sun-core {
+        width: 48px;
+        height: 48px;
+    }
+
+
+    .sun-ray {
+        transform-origin: center 60px;
+    }
+
+
+    .seed-world {
+        width: 350px;
+        height: 300px;
+
+        top: 55%;
+    }
+
+
+    .soil-platform {
+        width: 320px;
+        height: 145px;
+    }
+
+
+    .soil-front {
+        height: 65px;
+    }
+
+
+    .soil-left,
+    .soil-right {
+        height: 65px;
+        top: 67px;
+    }
+
+
+    .preloader-roots {
+        width: 255px;
+        height: 155px;
+    }
+
+
+    .preloader-plant {
+        width: 205px;
+        height: 225px;
+
+        top: 25%;
+    }
+
+
+    .loader-copy {
+        bottom: 7%;
+    }
+
+
+    .loader-copy p {
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .scene-glow {
+        width: 110vw;
+        height: 110vw;
+    }
+
+
+    .preloader-sun {
+        width: 105px;
+        height: 105px;
+
+        top: 26%;
+    }
+
+
+    .sun-core {
+        width: 43px;
+        height: 43px;
+    }
+
+
+    .sun-ray {
+        height: 18px;
+        transform-origin: center 52px;
+    }
+
+
+    .seed-world {
+        width: 300px;
+        height: 270px;
+
+        top: 55%;
+    }
+
+
+    .soil-platform {
+        width: 275px;
+        height: 125px;
+    }
+
+
+    .soil-front {
+        top: 62px;
+        height: 58px;
+    }
+
+
+    .soil-left,
+    .soil-right {
+        top: 62px;
+        height: 58px;
+    }
+
+
+    .seed-container {
+        transform:
+            translate(-50%, -50%)
+            translateZ(30px)
+            scale(0.85);
+    }
+
+
+    .preloader-roots {
+        width: 220px;
+        height: 135px;
+    }
+
+
+    .preloader-plant {
+        width: 175px;
+        height: 195px;
+
+        top: 27%;
+    }
+
+
+    .loader-copy {
+        width: calc(100% - 50px);
+        bottom: 6%;
+    }
+
+
+    .loader-eyebrow {
+        font-size: 8px;
+        letter-spacing: 0.24em;
+    }
+
+
+    .loader-copy p {
+        font-size: 14px;
+        margin-bottom: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}
