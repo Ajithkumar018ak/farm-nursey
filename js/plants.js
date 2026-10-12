@@ -32,10 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
        MOBILE DRAWER
     ===================================================== */
 
-    const menuButton = document.getElementById("menuButton");
+    const menuButton = document.getElementById("menuButton") || document.getElementById("menuToggle");
     const mobileDrawer = document.getElementById("mobileDrawer");
     const mobileOverlay = document.getElementById("mobileOverlay");
     const drawerClose = document.getElementById("drawerClose");
+    const menuToggle = document.getElementById("menuToggle");
 
     const openDrawer = () => {
 
@@ -44,7 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
         mobileDrawer.classList.add("active");
         mobileOverlay.classList.add("active");
 
+        mobileDrawer.setAttribute("aria-hidden", "false");
+        mobileOverlay.setAttribute("aria-hidden", "false");
+        document.body.classList.add("drawer-open");
         document.body.style.overflow = "hidden";
+
+        if (menuToggle) {
+            menuToggle.setAttribute("aria-expanded", "true");
+        }
     };
 
     const closeDrawer = () => {
@@ -54,7 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
         mobileDrawer.classList.remove("active");
         mobileOverlay.classList.remove("active");
 
+        mobileDrawer.setAttribute("aria-hidden", "true");
+        mobileOverlay.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("drawer-open");
         document.body.style.overflow = "";
+
+        if (menuToggle) {
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
     };
 
     if (menuButton) {
@@ -68,6 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mobileOverlay) {
         mobileOverlay.addEventListener("click", closeDrawer);
     }
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileDrawer && mobileDrawer.classList.contains("active")) {
+            closeDrawer();
+        }
+    });
 
     document.querySelectorAll(".drawer-nav a").forEach(link => {
 

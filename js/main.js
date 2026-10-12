@@ -1734,3 +1734,270 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   VERDANT ABOUT HERO IMAGE SLIDER
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const images = document.querySelectorAll(
+        ".about-hero-image"
+    );
+
+    const buttons = document.querySelectorAll(
+        ".about-slide"
+    );
+
+    const number = document.getElementById(
+        "aboutHeroNumber"
+    );
+
+    const counter = document.getElementById(
+        "aboutHeroCounter"
+    );
+
+    const eyebrow = document.getElementById(
+        "aboutHeroEyebrow"
+    );
+
+    const title = document.getElementById(
+        "aboutHeroTitle"
+    );
+
+    const description = document.getElementById(
+        "aboutHeroDescription"
+    );
+
+    const metaOne = document.getElementById(
+        "aboutMetaOne"
+    );
+
+    const metaTwo = document.getElementById(
+        "aboutMetaTwo"
+    );
+
+
+    /* SLIDE CONTENT */
+
+    const slideContent = [
+
+        {
+            eyebrow: "WHERE IT ALL BEGAN",
+            title: 'A little seed. <em>A bigger dream.</em>',
+            description:
+                "What started with a few carefully nurtured plants became a growing dream to bring the beauty of nature into everyday spaces.",
+            metaOne: "2016",
+            metaTwo: "2,500+"
+        },
+
+        {
+            eyebrow: "ROOTED IN NATURE",
+            title: 'Grown with care. <em>Built to flourish.</em>',
+            description:
+                "From healthy seedlings to thriving greenery, our nursery brings together thoughtful growing practices and a deep love for the natural world.",
+            metaOne: "100+",
+            metaTwo: "50+"
+        },
+
+        {
+            eyebrow: "A GREENER TOMORROW",
+            title: 'Growing green. <em>Growing together.</em>',
+            description:
+                "Our purpose is to help people discover the joy of growing plants and create greener spaces for generations to come.",
+            metaOne: "100%",
+            metaTwo: "∞"
+        }
+
+    ];
+
+
+    let currentIndex = 0;
+    let sliderInterval;
+
+
+    /* CHANGE SLIDE */
+
+    function showSlide(index) {
+
+        if (index < 0 || index >= images.length) {
+            return;
+        }
+
+        currentIndex = index;
+
+
+        /* CHANGE IMAGE */
+
+        images.forEach(function (image, i) {
+
+            image.classList.toggle(
+                "active",
+                i === index
+            );
+
+        });
+
+
+        /* CHANGE BUTTON */
+
+        buttons.forEach(function (button, i) {
+
+            button.classList.toggle(
+                "active",
+                i === index
+            );
+
+            button.setAttribute(
+                "aria-pressed",
+                i === index ? "true" : "false"
+            );
+
+        });
+
+
+        /* CHANGE IMAGE NUMBER */
+
+        if (number) {
+            number.textContent =
+                String(index + 1).padStart(2, "0");
+        }
+
+
+        /* CHANGE BOTTOM COUNTER */
+
+        if (counter) {
+            counter.textContent =
+                `${String(index + 1).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}`;
+        }
+
+
+        /* CHANGE CONTENT */
+
+        const content = slideContent[index];
+
+        if (content) {
+
+            if (eyebrow) {
+                eyebrow.textContent = content.eyebrow;
+            }
+
+            if (title) {
+                title.innerHTML = content.title;
+            }
+
+            if (description) {
+                description.textContent = content.description;
+            }
+
+            if (metaOne) {
+                metaOne.textContent = content.metaOne;
+            }
+
+            if (metaTwo) {
+                metaTwo.textContent = content.metaTwo;
+            }
+
+        }
+
+    }
+
+
+    /* BUTTON CLICK EVENTS */
+
+    buttons.forEach(function (button, index) {
+
+        button.addEventListener("click", function () {
+
+            showSlide(index);
+
+            restartSlider();
+
+        });
+
+    });
+
+
+    /* AUTO SLIDER */
+
+    function startSlider() {
+
+        sliderInterval = setInterval(function () {
+
+            const nextIndex =
+                (currentIndex + 1) % images.length;
+
+            showSlide(nextIndex);
+
+        }, 5000);
+
+    }
+
+
+    /* RESTART SLIDER */
+
+    function restartSlider() {
+
+        clearInterval(sliderInterval);
+
+        startSlider();
+
+    }
+
+
+    /* INITIALIZE */
+
+    if (images.length > 0 && buttons.length === images.length) {
+
+        showSlide(0);
+
+        startSlider();
+
+    } else {
+
+        console.warn(
+            "About slider: Check that the 3 image elements and 3 buttons exist."
+        );
+
+    }
+
+});

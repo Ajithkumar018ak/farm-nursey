@@ -223,7 +223,8 @@ button {
     font-size: 10px;
 }
 
-.menu-button {
+.menu-button,
+.menu-toggle {
     display: none;
 }
 
@@ -2311,11 +2312,14 @@ h2 em {
         padding: 18px 5vw;
     }
 
-    .desktop-nav {
-        display: none;
+    .desktop-nav,
+    .header-actions .header-login,
+    .header-actions .header-cta {
+        display: none !important;
     }
 
-    .menu-button {
+    .menu-button,
+    .menu-toggle {
         width: 43px;
         height: 43px;
 
@@ -2703,21 +2707,18 @@ h2 em {
     }
 
     .header-actions {
-        gap: 7px;
+        gap: 0;
+        margin-left: auto;
     }
 
-    .header-login {
-        min-width: auto;
-        padding: 10px 12px;
+    .header-login,
+    .header-cta {
+        display: none !important;
     }
 
-    .header-login i {
-        display: none;
-    }
-
-    .menu-button {
-        width: 39px;
-        height: 39px;
+    .menu-button,
+    .menu-toggle {
+        display: flex !important;
     }
 
     .plants-hero {

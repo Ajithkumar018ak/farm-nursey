@@ -385,21 +385,39 @@ button {
 
 .menu-toggle {
     display: none;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 7px;
-    background: rgba(255,255,255,.1);
-    border: 1px solid rgba(255,255,255,.18);
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    z-index: 5001;
+    color: #ffffff;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
 }
 
 .menu-toggle span {
-    width: 20px;
-    height: 1px;
-    background: var(--white);
-    transition: var(--transition);
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* =========================================================
@@ -2206,11 +2224,16 @@ button {
 @media (max-width: 1100px) {
 
     .desktop-nav {
-        display: none;
+        display: none !important;
+    }
+
+    .header-actions .header-login,
+    .header-actions .header-cta {
+        display: none !important;
     }
 
     .menu-toggle {
-        display: flex;
+        display: flex !important;
     }
 
     .hero-floating-card {
@@ -2597,44 +2620,78 @@ button {
 
 @media (max-width: 768px) {
 
-    .header-login {
-        min-width: 104px;
-        height: 42px;
-
-        padding: 0 15px;
-
-        font-size: 10px;
+    .header-login,
+    .header-cta {
+        display: none !important;
     }
 
-    .header-login i {
-        width: 18px;
-        height: 18px;
+    .site-header {
+        top: 12px;
+    }
 
-        font-size: 9px;
+    .site-header.scrolled {
+        top: 8px;
+    }
+
+    .header-container {
+        min-height: 60px;
+        padding: 0 16px;
+        gap: 15px;
+    }
+
+    .site-header .site-logo {
+        flex-shrink: 0;
+    }
+
+    .site-header .site-logo img {
+        width: auto !important;
+        max-width: 125px !important;
+        height: 42px !important;
+        object-fit: contain;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-left: auto;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+        width: 44px;
+        height: 44px;
     }
 
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
 
-    .header-login {
-        min-width: 94px;
-        height: 40px;
-
-        gap: 7px;
-
-        padding: 0 13px;
-
-        font-size: 9px;
-        letter-spacing: 0.10em;
+    .site-header {
+        top: 8px;
     }
 
-    .header-login i {
-        width: 17px;
-        height: 17px;
+    .header-container {
+        min-height: 54px;
+        padding: 0 12px;
+        gap: 10px;
+    }
 
-        font-size: 8px;
+    .site-header .site-logo img {
+        max-width: 105px !important;
+        height: 36px !important;
+    }
+
+    .menu-toggle {
+        width: 40px;
+        height: 40px;
+        gap: 4px;
+    }
+
+    .menu-toggle span {
+        width: 20px;
+        height: 2px;
     }
 
 }
@@ -7286,7 +7343,8 @@ button {
 ========================================================= */
 
 body.drawer-open {
-    overflow: hidden;
+    overflow: hidden !important;
+    touch-action: none;
 }
 
 
@@ -7294,11 +7352,11 @@ body.drawer-open {
    DESKTOP SAFETY
 ========================================================= */
 
-@media (min-width: 769px) {
+@media (min-width: 1101px) {
 
     .mobile-overlay,
     .mobile-drawer {
-        display: none;
+        display: none !important;
     }
 
 }
@@ -7365,3 +7423,350 @@ body.drawer-open {
     }
 
 }
+
+
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.footer-logo img {
+    display: block;
+    width: 160px;
+    height: 70px;
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+
+
+.site-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.site-logo img {
+    display: block;
+    width: 160px;
+    height: 70px;
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+
+
+.your-button i {
+    display: inline-block;
+    font-size: 18px;
+    transition: transform 0.4s ease, text-shadow 0.4s ease;
+    text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.2);
+    transform: perspective(100px) rotateY(-15deg);
+}
+
+.your-button:hover i {
+    transform: perspective(100px) rotateY(0deg) translate(3px, -3px);
+    text-shadow: 3px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   PLANT BOTTOM NOTE
+========================================= */
+
+.plant-bottom-note {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 24px 0;
+    margin-top: 30px;
+    border-top: 1px solid rgba(66, 99, 59, 0.2);
+    border-bottom: 1px solid rgba(66, 99, 59, 0.2);
+}
+
+/* LEFT SPAN ALIGNMENT */
+
+.plant-bottom-note > span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex: 1;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 1.8px;
+
+    color: #65765b;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+/* RIGHT LINK ALIGNMENT */
+
+.plant-bottom-note > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    color: #294e30;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: color 0.3s ease;
+}
+
+/* 3D ARROW */
+
+.plant-bottom-note > a i {
+    width: 38px;
+    height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: #ffffff;
+    background: #294e30;
+    border-radius: 50%;
+
+    font-size: 13px;
+
+    box-shadow:
+        0 4px 0 #193820,
+        0 7px 12px rgba(30, 65, 35, 0.15);
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* HOVER */
+
+.plant-bottom-note > a:hover {
+    color: #668f61;
+}
+
+.plant-bottom-note > a:hover i {
+    background: #668f61;
+
+    transform: translateY(-3px) rotate(-8deg);
+
+    box-shadow:
+        0 6px 0 #365a30,
+        0 10px 18px rgba(30, 65, 35, 0.2);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+    .plant-bottom-note {
+        gap: 20px;
+        padding: 22px 0;
+    }
+
+    .plant-bottom-note > span {
+        font-size: 10px;
+        letter-spacing: 1.3px;
+    }
+
+    .plant-bottom-note > a {
+        gap: 10px;
+        font-size: 12px;
+    }
+
+    .plant-bottom-note > a i {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .plant-bottom-note {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 22px 0;
+    }
+
+    .plant-bottom-note > span {
+        width: 100%;
+        flex: none;
+        text-align: left;
+        font-size: 10px;
+        letter-spacing: 1.4px;
+    }
+
+    .plant-bottom-note > a {
+        align-self: flex-start;
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+
+
+.plant-bottom-note > span {
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   TEXT LINK — MINIMAL STYLE
+========================================= */
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+
+    color: #000000;
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    text-decoration: none;
+
+    transition: gap 0.3s ease;
+}
+
+/* TEXT */
+
+.text-link span {
+    display: inline-block;
+    position: relative;
+
+    color: #000000;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    line-height: 1.6;
+}
+
+/* ARROW */
+
+.text-link i {
+    display: inline-block;
+
+    color: #000000;
+    font-size: 14px;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+/* HOVER */
+
+.text-link:hover {
+    gap: 17px;
+}
+
+.text-link:hover span {
+    color: #000000;
+}
+
+.text-link:hover i {
+    color: #668f61;
+    transform: translate(3px, -3px);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+    .text-link {
+        gap: 10px;
+        font-size: 12px;
+    }
+
+    .text-link i {
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+

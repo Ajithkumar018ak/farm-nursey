@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>404 — VERDANT</title>
+
+    <meta
+        name="description"
+        content="The page you're looking for has grown somewhere else."
+    >
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+            --green-950: #07120b;
+            --green-900: #0b1a10;
+            --green-800: #102417;
+            --green-700: #17321f;
+            --green-600: #24482c;
+
+            --sage: #668f61;
+            --sage-light: #9bb58a;
+
+            --cream: #f3efdf;
+            --cream-soft: #dcd9c8;
+
+            --gold: #d8ca91;
+
+            --shadow:
+                0 35px 100px rgba(0, 0, 0, .42);
+
+            --ease:
+                cubic-bezier(.22, 1, .36, 1);
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+            background: var(--green-950);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 42%,
+                    rgba(52, 91, 56, .34),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    circle at 15% 80%,
+                    rgba(38, 72, 44, .20),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(65, 95, 57, .12),
+                    transparent 28%
+                ),
+                var(--green-950);
+
+            color: var(--cream);
+
+            font-family: "DM Sans", sans-serif;
+        }
+
+        button,
+        a {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .error-page {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+
+            min-height: 650px;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           BACKGROUND ATMOSPHERE
+        ====================================================== */
+
+        .background-glow {
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            left: 50%;
+            top: 46%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(92, 136, 78, .18) 0%,
+                    rgba(61, 103, 62, .09) 32%,
+                    transparent 70%
+                );
+
+            filter: blur(8px);
+
+            pointer-events: none;
+
+            z-index: -5;
+        }
+
+        .background-ring {
+            position: absolute;
+
+            width: 760px;
+            height: 760px;
+
+            left: 50%;
+            top: 47%;
+
+            transform: translate(-50%, -50%);
+
+            border: 1px solid rgba(184, 207, 158, .08);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 100px rgba(120, 155, 103, .05);
+
+            pointer-events: none;
+
+            z-index: -4;
+        }
+
+        .background-ring::before,
+        .background-ring::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 65px;
+
+            border: 1px solid rgba(184, 207, 158, .05);
+
+            border-radius: 50%;
+        }
+
+        .background-ring::after {
+            inset: 140px;
+        }
+
+
+        /* =====================================================
+           GRAIN
+        ====================================================== */
+
+        .grain {
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .045;
+
+            z-index: 50;
+
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+        }
+
+
+        /* =====================================================
+           TOP BRAND
+        ====================================================== */
+
+        .minimal-brand {
+            position: absolute;
+
+            top: 38px;
+            left: 42px;
+
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            z-index: 20;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(207, 220, 185, .28);
+
+            border-radius: 50%;
+
+            color: var(--sage-light);
+
+            font-size: 13px;
+
+            background:
+                rgba(255, 255, 255, .025);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, .05);
+        }
+
+        .minimal-brand strong {
+            display: block;
+
+            color: var(--cream);
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: .25em;
+        }
+
+        .minimal-brand span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: rgba(243, 239, 223, .42);
+
+            font-size: 7px;
+
+            letter-spacing: .23em;
+        }
+
+
+        /* =====================================================
+           FLOATING BOTANICAL ELEMENTS
+        ====================================================== */
+
+        .floating-elements {
+            position: absolute;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+        .float-item {
+            position: absolute;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--sage-light);
+
+            opacity: .5;
+
+            filter:
+                drop-shadow(
+                    0 15px 22px rgba(0, 0, 0, .22)
+                );
+
+            transform-style: preserve-3d;
+
+            animation:
+                floatAround
+                var(--duration)
+                ease-in-out
+                infinite alternate;
+
+            animation-delay: var(--delay);
+        }
+
+
+        /* LEAVES */
+
+        .float-leaf {
+            font-size: var(--size);
+        }
+
+        .float-leaf i {
+            transform:
+                rotate(var(--rotate))
+                rotateY(25deg);
+
+            text-shadow:
+                8px 12px 18px rgba(0, 0, 0, .25);
+        }
+
+
+        /* FLOWERS */
+
+        .float-flower {
+            width: var(--size);
+            height: var(--size);
+
+            color: rgba(215, 202, 145, .68);
+
+            font-size: calc(var(--size) * .72);
+
+            text-shadow:
+                0 10px 20px rgba(0, 0, 0, .25);
+        }
+
+
+        /* SEEDS */
+
+        .float-seed {
+            width: var(--size);
+            height: calc(var(--size) * 1.35);
+
+            border-radius: 70% 35% 70% 35%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #b2a66e,
+                    #706943 70%,
+                    #4d4b30
+                );
+
+            box-shadow:
+                inset -4px -5px 8px rgba(0, 0, 0, .25),
+                8px 14px 22px rgba(0, 0, 0, .22);
+
+            transform:
+                rotate(var(--rotate))
+                rotateX(25deg);
+        }
+
+        .float-seed::after {
+            content: "";
+
+            position: absolute;
+
+            width: 35%;
+            height: 2px;
+
+            left: 22%;
+            top: 30%;
+
+            border-radius: 50%;
+
+            background: rgba(255, 245, 190, .4);
+
+            transform: rotate(-30deg);
+        }
+
+
+        @keyframes floatAround {
+
+            0% {
+                transform:
+                    translate3d(
+                        calc(var(--move-x) * -1),
+                        calc(var(--move-y) * -1),
+                        0
+                    )
+                    rotate(var(--rotate));
+            }
+
+            100% {
+                transform:
+                    translate3d(
+                        var(--move-x),
+                        var(--move-y),
+                        25px
+                    )
+                    rotate(calc(var(--rotate) + 18deg));
+            }
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ====================================================== */
+
+        .error-content {
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 100px 30px 50px;
+
+            text-align: center;
+
+            z-index: 10;
+        }
+
+
+        /* =====================================================
+           EYEBROW
+        ====================================================== */
+
+        .error-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-bottom: 22px;
+
+            color: var(--sage-light);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: .34em;
+            text-transform: uppercase;
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            animation:
+                revealUp
+                .9s
+                var(--ease)
+                .15s
+                forwards;
+        }
+
+        .error-eyebrow::before,
+        .error-eyebrow::after {
+            content: "";
+
+            width: 30px;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(155, 181, 138, .6)
+                );
+        }
+
+        .error-eyebrow::after {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(155, 181, 138, .6),
+                    transparent
+                );
+        }
+
+
+        /* =====================================================
+           404 NUMBER
+        ====================================================== */
+
+        .error-number {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            height: 300px;
+
+            color: var(--cream);
+
+            font-family: "Playfair Display", serif;
+
+            font-size:
+                clamp(
+                    180px,
+                    27vw,
+                    330px
+                );
+
+            line-height: .72;
+
+            letter-spacing: -.075em;
+
+            user-select: none;
+
+            opacity: 0;
+
+            transform:
+                translateY(45px)
+                scale(.9);
+
+            animation:
+                numberReveal
+                1.15s
+                var(--ease)
+                .25s
+                forwards;
+        }
+
+        .number-zero {
+            position: relative;
+
+            width:
+                clamp(
+                    150px,
+                    23vw,
+                    265px
+                );
+
+            height:
+                clamp(
+                    190px,
+                    27vw,
+                    285px
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 5px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(217, 226, 193, .13);
+
+            background:
+                radial-gradient(
+                    ellipse at 50% 45%,
+                    rgba(101, 143, 97, .22),
+                    rgba(10, 25, 15, .12) 50%,
+                    transparent 72%
+                );
+
+            box-shadow:
+                inset 0 0 55px rgba(102, 143, 97, .08),
+                0 25px 70px rgba(0, 0, 0, .18);
+
+            overflow: visible;
+
+            font-size: 0;
+
+            transform:
+                rotateX(7deg)
+                rotateY(-5deg);
+        }
+
+
+        /* =====================================================
+           3D FLOWER POT INSIDE O
+        ====================================================== */
+
+        .flower-world {
+            position: absolute;
+
+            left: 50%;
+            top: 51%;
+
+            width: 155px;
+            height: 210px;
+
+            transform:
+                translate(-50%, -50%)
+                rotateX(8deg);
+
+            transform-style: preserve-3d;
+
+            perspective: 700px;
+        }
+
+
+        /* STEM */
+
+        .flower-stem {
+            position: absolute;
+
+            left: 50%;
+            bottom: 69px;
+
+            width: 7px;
+            height: 105px;
+
+            border-radius: 100px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #314d2d,
+                    #8fae7b,
+                    #314d2d
+                );
+
+            transform:
+                translateX(-50%)
+                rotate(-4deg);
+
+            transform-origin: bottom center;
+
+            box-shadow:
+                5px 8px 13px rgba(0, 0, 0, .3);
+
+            z-index: 4;
+        }
+
+        .flower-stem::after {
+            content: "";
+
+            position: absolute;
+
+            width: 28px;
+            height: 45px;
+
+            right: -19px;
+            top: 48px;
+
+            border-radius:
+                100% 0 100% 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #799765,
+                    #29442a
+                );
+
+            transform:
+                rotate(32deg)
+                skewY(-7deg);
+        }
+
+
+        /* FLOWER HEAD */
+
+        .flower-head {
+            position: absolute;
+
+            left: 50%;
+            top: 20px;
+
+            width: 86px;
+            height: 86px;
+
+            transform:
+                translateX(-50%)
+                translateZ(20px);
+
+            transform-style: preserve-3d;
+
+            animation:
+                flowerSway
+                4s
+                ease-in-out
+                infinite;
+
+            z-index: 8;
+        }
+
+
+        /* PETALS */
+
+        .petal {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 37px;
+            height: 58px;
+
+            border-radius:
+                65% 65% 45% 45%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #eee8bc 0%,
+                    #d5c97f 42%,
+                    #8f8549 100%
+                );
+
+            box-shadow:
+                inset -5px -8px 12px rgba(68, 61, 26, .18),
+                5px 9px 13px rgba(0, 0, 0, .23);
+
+            transform-origin:
+                50% 90%;
+
+            transform:
+                translate(-50%, -90%)
+                rotate(var(--petal-angle))
+                translateY(-19px)
+                rotateX(22deg);
+        }
+
+        .petal:nth-child(1) {
+            --petal-angle: 0deg;
+        }
+
+        .petal:nth-child(2) {
+            --petal-angle: 45deg;
+        }
+
+        .petal:nth-child(3) {
+            --petal-angle: 90deg;
+        }
+
+        .petal:nth-child(4) {
+            --petal-angle: 135deg;
+        }
+
+        .petal:nth-child(5) {
+            --petal-angle: 180deg;
+        }
+
+        .petal:nth-child(6) {
+            --petal-angle: 225deg;
+        }
+
+        .petal:nth-child(7) {
+            --petal-angle: 270deg;
+        }
+
+        .petal:nth-child(8) {
+            --petal-angle: 315deg;
+        }
+
+
+        /* FLOWER CENTER */
+
+        .flower-center {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 29px;
+            height: 29px;
+
+            border-radius: 50%;
+
+            transform:
+                translate(-50%, -50%)
+                translateZ(35px);
+
+            background:
+                radial-gradient(
+                    circle at 32% 28%,
+                    #f7e8a6,
+                    #a98e38 70%,
+                    #61521f
+                );
+
+            box-shadow:
+                inset -4px -5px 7px rgba(0, 0, 0, .24),
+                0 7px 15px rgba(0, 0, 0, .3);
+
+            z-index: 12;
+        }
+
+
+        /* =====================================================
+           3D POT
+        ====================================================== */
+
+        .flower-pot {
+            position: absolute;
+
+            left: 50%;
+            bottom: 21px;
+
+            width: 88px;
+            height: 72px;
+
+            transform:
+                translateX(-50%)
+                perspective(400px)
+                rotateX(-4deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #392d1e,
+                    #785c3c 20%,
+                    #9a754b 48%,
+                    #5b442c 78%,
+                    #302619
+                );
+
+            clip-path:
+                polygon(
+                    4% 0,
+                    96% 0,
+                    84% 100%,
+                    16% 100%
+                );
+
+            box-shadow:
+                15px 22px 25px rgba(0, 0, 0, .35);
+
+            z-index: 6;
+        }
+
+        .flower-pot::before {
+            content: "";
+
+            position: absolute;
+
+            left: -7px;
+            top: -8px;
+
+            width: calc(100% + 14px);
+            height: 17px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    ellipse at 50% 40%,
+                    #251b11 0%,
+                    #4b3822 60%,
+                    #725536 100%
+                );
+
+            box-shadow:
+                inset 0 3px 3px rgba(255, 225, 167, .12),
+                0 4px 7px rgba(0, 0, 0, .28);
+        }
+
+        .flower-pot::after {
+            content: "";
+
+            position: absolute;
+
+            left: 14px;
+            right: 14px;
+            bottom: 10px;
+
+            height: 1px;
+
+            background:
+                rgba(245, 218, 165, .18);
+        }
+
+
+        /* =====================================================
+           SOIL PARTICLES
+        ====================================================== */
+
+        .soil-particle {
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #a78d56;
+
+            opacity: .55;
+
+            animation:
+                soilFloat
+                3s
+                ease-in-out
+                infinite alternate;
+        }
+
+        .soil-particle:nth-child(1) {
+            left: 15%;
+            top: 25%;
+            animation-delay: -.2s;
+        }
+
+        .soil-particle:nth-child(2) {
+            left: 76%;
+            top: 31%;
+            animation-delay: -.8s;
+        }
+
+        .soil-particle:nth-child(3) {
+            left: 25%;
+            top: 62%;
+            animation-delay: -1.2s;
+        }
+
+        .soil-particle:nth-child(4) {
+            left: 81%;
+            top: 68%;
+            animation-delay: -1.8s;
+        }
+
+        .soil-particle:nth-child(5) {
+            left: 8%;
+            top: 48%;
+            animation-delay: -2.2s;
+        }
+
+        .soil-particle:nth-child(6) {
+            right: 10%;
+            top: 52%;
+            animation-delay: -2.6s;
+        }
+
+        @keyframes soilFloat {
+
+            from {
+                transform:
+                    translate3d(0, 0, 0)
+                    scale(.8);
+            }
+
+            to {
+                transform:
+                    translate3d(0, -16px, 25px)
+                    scale(1.15);
+            }
+        }
+
+
+        @keyframes flowerSway {
+
+            0%,
+            100% {
+                transform:
+                    translateX(-50%)
+                    translateZ(20px)
+                    rotateZ(-3deg)
+                    rotateY(-4deg);
+            }
+
+            50% {
+                transform:
+                    translateX(-50%)
+                    translateZ(20px)
+                    rotateZ(4deg)
+                    rotateY(6deg);
+            }
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ====================================================== */
+
+        .error-message {
+            max-width: 560px;
+
+            margin-top: 13px;
+
+            opacity: 0;
+
+            transform: translateY(25px);
+
+            animation:
+                revealUp
+                .9s
+                var(--ease)
+                .55s
+                forwards;
+        }
+
+        .error-message h1 {
+            margin-bottom: 10px;
+
+            color: var(--cream);
+
+            font-family: "Playfair Display", serif;
+
+            font-size:
+                clamp(
+                    25px,
+                    3vw,
+                    38px
+                );
+
+            font-weight: 500;
+
+            letter-spacing: -.02em;
+        }
+
+        .error-message h1 em {
+            color: var(--sage-light);
+
+            font-style: italic;
+        }
+
+        .error-message p {
+            max-width: 470px;
+
+            margin: 0 auto;
+
+            color: rgba(243, 239, 223, .56);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ====================================================== */
+
+        .error-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 27px;
+
+            opacity: 0;
+
+            transform: translateY(22px);
+
+            animation:
+                revealUp
+                .9s
+                var(--ease)
+                .7s
+                forwards;
+        }
+
+        .back-home {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            min-height: 50px;
+
+            padding: 0 21px 0 24px;
+
+            border:
+                1px solid
+                rgba(218, 226, 199, .18);
+
+            border-radius: 100px;
+
+            background:
+                rgba(239, 239, 216, .055);
+
+            color: var(--cream);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: .14em;
+
+            text-transform: uppercase;
+
+            overflow: hidden;
+
+            transition:
+                .45s var(--ease);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, .06),
+                0 15px 35px rgba(0, 0, 0, .15);
+        }
+
+        .back-home::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(255, 255, 255, .12),
+                    transparent 80%
+                );
+
+            transform: translateX(-110%);
+
+            transition: .7s var(--ease);
+        }
+
+        .back-home span,
+        .back-home i {
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-home i {
+            width: 29px;
+            height: 29px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: var(--sage);
+
+            color: #102014;
+
+            font-size: 10px;
+
+            transition:
+                .45s var(--ease);
+        }
+
+        .back-home:hover {
+            border-color:
+                rgba(171, 197, 153, .45);
+
+            background:
+                rgba(107, 143, 97, .13);
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 20px 45px rgba(0, 0, 0, .25);
+        }
+
+        .back-home:hover::before {
+            transform: translateX(110%);
+        }
+
+        .back-home:hover i {
+            transform:
+                rotate(45deg)
+                scale(1.08);
+        }
+
+
+        /* =====================================================
+           BOTTOM NOTE
+        ====================================================== */
+
+        .bottom-note {
+            position: absolute;
+
+            left: 50%;
+            bottom: 32px;
+
+            transform:
+                translateX(-50%);
+
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: rgba(243, 239, 223, .29);
+
+            font-size: 8px;
+
+            font-weight: 600;
+
+            letter-spacing: .27em;
+
+            text-transform: uppercase;
+
+            white-space: nowrap;
+
+            z-index: 15;
+        }
+
+        .bottom-note i {
+            color: var(--sage);
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           REVEAL
+        ====================================================== */
+
+        @keyframes revealUp {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+        @keyframes numberReveal {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(45px)
+                    scale(.9)
+                    rotateX(15deg);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1)
+                    rotateX(0);
+            }
+        }
+
+
+        /* =====================================================
+           PAGE ENTER
+        ====================================================== */
+
+        .error-page {
+            opacity: 0;
+
+            transform: scale(1.025);
+
+            animation:
+                pageEnter
+                1.2s
+                var(--ease)
+                .05s
+                forwards;
+        }
+
+        @keyframes pageEnter {
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        /* =====================================================
+           EXIT ANIMATION
+        ====================================================== */
+
+        .error-page.is-leaving {
+            animation:
+                pageLeave
+                .75s
+                var(--ease)
+                forwards;
+        }
+
+        @keyframes pageLeave {
+
+            to {
+                opacity: 0;
+
+                transform:
+                    scale(.97)
+                    translateY(-15px);
+
+                filter: blur(8px);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .minimal-brand {
+                top: 25px;
+                left: 25px;
+            }
+
+            .background-ring {
+                width: 620px;
+                height: 620px;
+            }
+
+            .error-number {
+                height: 260px;
+            }
+
+            .flower-world {
+                transform:
+                    translate(-50%, -50%)
+                    scale(.9)
+                    rotateX(8deg);
+            }
+
+            .float-item:nth-child(3),
+            .float-item:nth-child(8) {
+                display: none;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 600px) {
+
+            body {
+                overflow: hidden;
+            }
+
+            .error-page {
+                min-height: 600px;
+            }
+
+            .minimal-brand {
+                top: 22px;
+                left: 20px;
+            }
+
+            .brand-mark {
+                width: 31px;
+                height: 31px;
+            }
+
+            .minimal-brand strong {
+                font-size: 11px;
+            }
+
+            .minimal-brand span {
+                font-size: 6px;
+            }
+
+            .background-glow {
+                width: 470px;
+                height: 470px;
+            }
+
+            .background-ring {
+                width: 500px;
+                height: 500px;
+            }
+
+            .background-ring::before {
+                inset: 45px;
+            }
+
+            .background-ring::after {
+                inset: 95px;
+            }
+
+            .error-content {
+                padding:
+                    80px 20px 60px;
+            }
+
+            .error-eyebrow {
+                margin-bottom: 15px;
+
+                font-size: 8px;
+
+                letter-spacing: .25em;
+            }
+
+            .error-eyebrow::before,
+            .error-eyebrow::after {
+                width: 18px;
+            }
+
+            .error-number {
+                height: 205px;
+
+                font-size: 180px;
+            }
+
+            .number-zero {
+                width: 145px;
+                height: 190px;
+
+                margin: 0 2px;
+            }
+
+            .flower-world {
+                transform:
+                    translate(-50%, -50%)
+                    scale(.73)
+                    rotateX(8deg);
+            }
+
+            .error-message {
+                margin-top: 5px;
+            }
+
+            .error-message h1 {
+                font-size: 25px;
+            }
+
+            .error-message p {
+                max-width: 320px;
+
+                font-size: 11px;
+
+                line-height: 1.75;
+            }
+
+            .error-actions {
+                margin-top: 21px;
+            }
+
+            .back-home {
+                min-height: 46px;
+
+                padding-left: 19px;
+
+                font-size: 9px;
+            }
+
+            .back-home i {
+                width: 27px;
+                height: 27px;
+            }
+
+            .bottom-note {
+                bottom: 20px;
+
+                font-size: 6px;
+
+                letter-spacing: .18em;
+            }
+
+            .float-item {
+                opacity: .35;
+            }
+
+            .float-item:nth-child(2),
+            .float-item:nth-child(5),
+            .float-item:nth-child(9) {
+                display: none;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 390px) {
+
+            .error-number {
+                height: 185px;
+
+                font-size: 155px;
+            }
+
+            .number-zero {
+                width: 125px;
+                height: 165px;
+            }
+
+            .flower-world {
+                transform:
+                    translate(-50%, -50%)
+                    scale(.64)
+                    rotateX(8deg);
+            }
+
+            .error-message h1 {
+                font-size: 22px;
+            }
+
+            .error-message p {
+                font-size: 10px;
+            }
+
+            .minimal-brand {
+                top: 18px;
+                left: 17px;
+            }
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         404 PAGE
+    ====================================================== -->
+
+    <main class="error-page" id="errorPage">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="background-glow"></div>
+
+        <div class="background-ring"></div>
+
+        <div class="grain"></div>
+
+
+        <!-- =================================================
+             MINIMAL BRAND
+        ================================================== -->
+
+
+
+        <!-- =================================================
+             FLOATING FLOWERS / SEEDS / LEAVES
+        ================================================== -->
+
+        <div class="floating-elements">
+
+
+            <!-- LEAF -->
+
+            <span
+                class="float-item float-leaf"
+                style="
+                    --size:38px;
+                    --rotate:-28deg;
+                    --move-x:35px;
+                    --move-y:28px;
+                    --duration:5s;
+                    --delay:-1s;
+                    left:9%;
+                    top:22%;
+                "
+            >
+                <i class="fa-solid fa-leaf"></i>
+            </span>
+
+
+            <!-- FLOWER -->
+
+            <span
+                class="float-item float-flower"
+                style="
+                    --size:42px;
+                    --rotate:15deg;
+                    --move-x:-25px;
+                    --move-y:30px;
+                    --duration:6s;
+                    --delay:-3s;
+                    left:17%;
+                    top:68%;
+                "
+            >
+                <i class="fa-solid fa-spa"></i>
+            </span>
+
+
+            <!-- SEED -->
+
+            <span
+                class="float-item float-seed"
+                style="
+                    --size:13px;
+                    --rotate:24deg;
+                    --move-x:38px;
+                    --move-y:-28px;
+                    --duration:4.5s;
+                    --delay:-2s;
+                    left:28%;
+                    top:18%;
+                "
+            ></span>
+
+
+            <!-- LEAF -->
+
+            <span
+                class="float-item float-leaf"
+                style="
+                    --size:31px;
+                    --rotate:42deg;
+                    --move-x:-30px;
+                    --move-y:25px;
+                    --duration:5.5s;
+                    --delay:-1.5s;
+                    right:10%;
+                    top:22%;
+                "
+            >
+                <i class="fa-solid fa-leaf"></i>
+            </span>
+
+
+            <!-- FLOWER -->
+
+            <span
+                class="float-item float-flower"
+                style="
+                    --size:37px;
+                    --rotate:-15deg;
+                    --move-x:28px;
+                    --move-y:-30px;
+                    --duration:6.5s;
+                    --delay:-4s;
+                    right:17%;
+                    top:67%;
+                "
+            >
+                <i class="fa-solid fa-seedling"></i>
+            </span>
+
+
+            <!-- SEED -->
+
+            <span
+                class="float-item float-seed"
+                style="
+                    --size:10px;
+                    --rotate:-18deg;
+                    --move-x:-30px;
+                    --move-y:35px;
+                    --duration:5s;
+                    --delay:-2.8s;
+                    right:27%;
+                    top:31%;
+                "
+            ></span>
+
+
+            <!-- LEAF -->
+
+            <span
+                class="float-item float-leaf"
+                style="
+                    --size:25px;
+                    --rotate:-55deg;
+                    --move-x:25px;
+                    --move-y:-20px;
+                    --duration:4s;
+                    --delay:-.5s;
+                    left:6%;
+                    bottom:23%;
+                "
+            >
+                <i class="fa-solid fa-leaf"></i>
+            </span>
+
+
+            <!-- FLOWER -->
+
+            <span
+                class="float-item float-flower"
+                style="
+                    --size:31px;
+                    --rotate:20deg;
+                    --move-x:-25px;
+                    --move-y:-28px;
+                    --duration:5.8s;
+                    --delay:-2.5s;
+                    right:7%;
+                    bottom:25%;
+                "
+            >
+                <i class="fa-solid fa-spa"></i>
+            </span>
+
+
+            <!-- SEED -->
+
+            <span
+                class="float-item float-seed"
+                style="
+                    --size:9px;
+                    --rotate:42deg;
+                    --move-x:20px;
+                    --move-y:20px;
+                    --duration:4.8s;
+                    --delay:-1.2s;
+                    left:40%;
+                    top:12%;
+                "
+            ></span>
+
+
+            <!-- SEED -->
+
+            <span
+                class="float-item float-seed"
+                style="
+                    --size:11px;
+                    --rotate:-30deg;
+                    --move-x:-25px;
+                    --move-y:24px;
+                    --duration:5.2s;
+                    --delay:-3.2s;
+                    right:39%;
+                    top:16%;
+                "
+            ></span>
+
+        </div>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <section class="error-content">
+
+
+            <div class="error-eyebrow">
+                PAGE NOT FOUND
+            </div>
+
+
+            <!-- =============================================
+                 404 NUMBER
+            ============================================== -->
+
+            <div class="error-number">
+
+
+                <span>4</span>
+
+
+                <!-- =========================================
+                     ZERO
+                ========================================== -->
+
+                <span class="number-zero">
+
+
+                    <!-- 3D FLOWER -->
+                    <div class="flower-world">
+
+
+                        <!-- STEM -->
+
+                        <div class="flower-stem"></div>
+
+
+                        <!-- FLOWER -->
+
+                        <div class="flower-head">
+
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+                            <span class="petal"></span>
+
+                            <span class="flower-center"></span>
+
+                        </div>
+
+
+                        <!-- POT -->
+
+                        <div class="flower-pot"></div>
+
+
+                    </div>
+
+
+                    <!-- SOIL PARTICLES -->
+
+                    <span class="soil-particle"></span>
+                    <span class="soil-particle"></span>
+                    <span class="soil-particle"></span>
+                    <span class="soil-particle"></span>
+                    <span class="soil-particle"></span>
+                    <span class="soil-particle"></span>
+
+
+                </span>
+
+
+                <span>4</span>
+
+
+            </div>
+
+
+            <!-- =============================================
+                 MESSAGE
+            ============================================== -->
+
+            <div class="error-message">
+
+                <h1>
+                    This little corner
+                    <em>hasn't grown yet.</em>
+                </h1>
+
+                <p>
+                    The page you're looking for may have moved,
+                    bloomed somewhere else, or simply never took root.
+                </p>
+
+            </div>
+
+
+            <!-- =============================================
+                 ACTION
+            ============================================== -->
+
+            <div class="error-actions">
+
+                <a
+                    href="404.html"
+                    class="back-home"
+                    id="backHome"
+                >
+
+                    <span>
+                        Back to the garden
+                    </span>
+
+                    <i class="fa-solid fa-arrow-up"></i>
+
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             BOTTOM NOTE
+        ================================================== -->
+
+        <div class="bottom-note">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <span>
+                Keep growing something beautiful
+            </span>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+
+            const page =
+                document.getElementById("errorPage");
+
+
+            const backHome =
+                document.getElementById("backHome");
+
+
+            /* =================================================
+               SUBTLE MOUSE PARALLAX
+            ================================================== */
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            let currentX = 0;
+            let currentY = 0;
+
+
+            document.addEventListener("mousemove", (event) => {
+
+                mouseX =
+                    (event.clientX / window.innerWidth - .5)
+                    * 2;
+
+                mouseY =
+                    (event.clientY / window.innerHeight - .5)
+                    * 2;
+
+            });
+
+
+            function animateParallax() {
+
+                currentX +=
+                    (mouseX - currentX) * .035;
+
+                currentY +=
+                    (mouseY - currentY) * .035;
+
+
+                const ring =
+                    document.querySelector(
+                        ".background-ring"
+                    );
+
+
+                const glow =
+                    document.querySelector(
+                        ".background-glow"
+                    );
+
+
+                const flower =
+                    document.querySelector(
+                        ".flower-world"
+                    );
+
+
+                if (ring) {
+
+                    ring.style.transform =
+                        `
+                        translate(
+                            calc(-50% + ${currentX * 10}px),
+                            calc(-50% + ${currentY * 10}px)
+                        )
+                        rotateX(${currentY * 2}deg)
+                        rotateY(${currentX * 2}deg)
+                        `;
+
+                }
+
+
+                if (glow) {
+
+                    glow.style.transform =
+                        `
+                        translate(
+                            calc(-50% + ${currentX * 18}px),
+                            calc(-50% + ${currentY * 18}px)
+                        )
+                        `;
+
+                }
+
+
+                if (flower) {
+
+                    flower.style.marginLeft =
+                        `${currentX * 5}px`;
+
+                    flower.style.marginTop =
+                        `${currentY * 5}px`;
+
+                }
+
+
+                requestAnimationFrame(
+                    animateParallax
+                );
+
+            }
+
+
+            animateParallax();
+
+
+            /* =================================================
+               BUTTON EXIT ANIMATION
+            ================================================== */
+
+            if (backHome) {
+
+                backHome.addEventListener(
+                    "click",
+                    (event) => {
+
+                        const href =
+                            backHome.getAttribute("href");
+
+                        if (
+                            !href ||
+                            href === "#" ||
+                            href.startsWith("javascript:")
+                        ) {
+                            return;
+                        }
+
+
+                        event.preventDefault();
+
+
+                        page.classList.add(
+                            "is-leaving"
+                        );
+
+
+                        setTimeout(() => {
+
+                            window.location.href =
+                                href;
+
+                        }, 650);
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               FLOATING ELEMENT MOUSE RESPONSE
+            ================================================== */
+
+            const floatingItems =
+                document.querySelectorAll(
+                    ".float-item"
+                );
+
+
+            document.addEventListener(
+                "mousemove",
+                (event) => {
+
+                    const x =
+                        (event.clientX /
+                            window.innerWidth -
+                            .5) * 18;
+
+                    const y =
+                        (event.clientY /
+                            window.innerHeight -
+                            .5) * 18;
+
+
+                    floatingItems.forEach(
+                        (item, index) => {
+
+                            const depth =
+                                (index % 3 + 1)
+                                * .35;
+
+
+                            item.style.marginLeft =
+                                `${x * depth}px`;
+
+                            item.style.marginTop =
+                                `${y * depth}px`;
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* =================================================
+               TOUCH FRIENDLY
+            ================================================== */
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+
+            document.addEventListener(
+                "touchstart",
+                (event) => {
+
+                    if (
+                        event.touches &&
+                        event.touches.length
+                    ) {
+
+                        touchStartX =
+                            event.touches[0].clientX;
+
+                        touchStartY =
+                            event.touches[0].clientY;
+
+                    }
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            document.addEventListener(
+                "touchmove",
+                (event) => {
+
+                    if (
+                        !event.touches ||
+                        !event.touches.length
+                    ) {
+                        return;
+                    }
+
+
+                    const touch =
+                        event.touches[0];
+
+
+                    const x =
+                        (touch.clientX /
+                            window.innerWidth -
+                            .5) * 12;
+
+                    const y =
+                        (touch.clientY /
+                            window.innerHeight -
+                            .5) * 12;
+
+
+                    const flower =
+                        document.querySelector(
+                            ".flower-world"
+                        );
+
+
+                    if (flower) {
+
+                        flower.style.marginLeft =
+                            `${x}px`;
+
+                        flower.style.marginTop =
+                            `${y}px`;
+
+                    }
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+        });
+
+    </script>
+
+</body>
+</html>
