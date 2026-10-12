@@ -2001,3 +2001,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+
+
+
+
+
+const userName = document.getElementById("name").value.trim();
+
+window.location.href =
+    "user-dashboard.html?name=" + encodeURIComponent(userName);

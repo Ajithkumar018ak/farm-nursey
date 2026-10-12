@@ -1,0 +1,3232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GREENROOTS — My Garden</title>
+<meta name="theme-color" content="#173d2b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+:root {
+    --forest: #173d2b;
+    --forest-dark: #102d20;
+    --green: #477a50;
+    --green-light: #e6efe3;
+    --leaf: #8db17e;
+    --cream: #f7f6ef;
+    --white: #fff;
+    --text: #20372a;
+    --muted: #7a877c;
+    --border: #e8ebe2;
+    --gold: #d9ae63;
+    --shadow: 0 12px 35px rgba(24,56,37,.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible {
+    outline: 3px solid var(--leaf);
+    outline-offset: 3px;
+}
+
+/* =====================================================
+   JOINED DASHBOARD LAYOUT
+===================================================== */
+
+.dashboard-shell {
+    display: grid;
+    grid-template-columns: 258px minmax(0,1fr);
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--cream);
+}
+
+/* =====================================================
+   FIXED SIDEBAR — ONLY MAIN CONTENT SCROLLS
+===================================================== */
+
+.sidebar {
+    width: 258px;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--forest);
+    color: white;
+    padding: 24px 17px 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 50;
+    border-right: 1px solid rgba(255,255,255,.08);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 9px 23px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    width: 43px;
+    height: 43px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -.5px;
+}
+
+.brand-subtitle {
+    display: block;
+    margin-top: 5px;
+    color: #b8d0b7;
+    font-size: 9px;
+    letter-spacing: 2.2px;
+    font-weight: 600;
+}
+
+.sidebar-label {
+    padding: 24px 12px 11px;
+    color: #91ac96;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 11px;
+    color: #c5d6c6;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    transition: background .2s, color .2s;
+}
+
+.nav-item i {
+    width: 19px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: rgba(255,255,255,.08);
+    color: white;
+}
+
+.nav-item.active {
+    color: white;
+    background: rgba(255,255,255,.13);
+    border-color: rgba(255,255,255,.11);
+}
+
+.nav-item.active i {
+    color: #b4d49d;
+}
+
+.nav-count {
+    margin-left: auto;
+    min-width: 21px;
+    height: 21px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    font-size: 9px;
+    background: rgba(255,255,255,.12);
+    color: #d9ead8;
+}
+
+/* SIDEBAR BOTTOM ALWAYS STAYS AT BOTTOM */
+
+.sidebar-bottom {
+    margin-top: auto;
+    flex-shrink: 0;
+    padding-top: 13px;
+}
+
+.garden-help {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.13);
+    background: rgba(255,255,255,.06);
+}
+
+.garden-help-icon {
+    width: 31px;
+    height: 31px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(177,211,151,.17);
+    color: #c4e1ad;
+    margin-bottom: 10px;
+}
+
+.garden-help h4 {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.garden-help p {
+    font-size: 10px;
+    color: #b8cdb9;
+    line-height: 1.65;
+    margin-bottom: 10px;
+}
+
+.help-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #d0e6bf;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 5px 12px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.12);
+}
+
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #d7e7cc;
+    color: var(--forest);
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.profile-meta {
+    min-width: 0;
+    flex: 1;
+}
+
+.profile-meta strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-meta span {
+    display: block;
+    color: #b3c9b5;
+    font-size: 9px;
+    margin-top: 4px;
+}
+
+.logout-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 13px;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 11px;
+    background: rgba(255,255,255,.05);
+    color: #f0c5b8;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background .2s, border-color .2s;
+}
+
+.logout-button i {
+    width: 19px;
+    text-align: center;
+}
+
+.logout-button:hover {
+    background: rgba(216,104,82,.16);
+    border-color: rgba(216,104,82,.3);
+}
+
+/* =====================================================
+   MAIN AREA
+===================================================== */
+
+.main-area {
+    min-width: 0;
+    min-height: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--cream);
+}
+
+/* TOPBAR STAYS FIXED */
+
+.topbar {
+    min-height: 82px;
+    flex-shrink: 0;
+    padding: 16px 30px;
+    background: rgba(255,255,255,.94);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 5;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.mobile-menu-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    color: var(--forest);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.page-heading {
+    min-width: 0;
+}
+
+.page-heading h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -.5px;
+}
+
+.page-heading p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.search-box {
+    width: 220px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    color: #879187;
+}
+
+.search-box i {
+    font-size: 12px;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    color: var(--text);
+    background: transparent;
+    font-size: 11px;
+}
+
+.icon-button {
+    width: 41px;
+    height: 41px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: white;
+    color: var(--forest);
+    font-size: 14px;
+}
+
+.notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 7px;
+    height: 7px;
+    background: #d17c53;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+/* ONLY THIS AREA SCROLLS */
+
+.content-area {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 27px 30px 40px;
+    scrollbar-width: thin;
+    scrollbar-color: #b6c8b1 transparent;
+}
+
+.content-area::-webkit-scrollbar {
+    width: 7px;
+}
+
+.content-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+    background: #c4d2bf;
+    border-radius: 20px;
+}
+
+.page-panel {
+    display: none;
+    animation: panelEnter .3s ease both;
+}
+
+.page-panel.active {
+    display: block;
+}
+
+@keyframes panelEnter {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.section-heading p {
+    margin-top: 5px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    border: 0;
+    background: transparent;
+}
+
+.text-link:hover {
+    color: var(--forest-dark);
+}
+
+/* =====================================================
+   WELCOME BANNER
+===================================================== */
+
+.welcome-banner {
+    min-height: 250px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--forest);
+    color: white;
+    isolation: isolate;
+    margin-bottom: 24px;
+}
+
+.welcome-copy {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+    padding: 30px 10px 30px 30px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #c5dfad;
+}
+
+.welcome-copy h2 {
+    max-width: 420px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(27px, 3vw, 38px);
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -.5px;
+    margin: 15px 0 10px;
+}
+
+.welcome-copy p {
+    max-width: 380px;
+    color: #d1e0d0;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-primary, .btn-secondary, .btn-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 15px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+    transition: transform .2s, background .2s;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-light:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #d7e7c8;
+    color: var(--forest);
+}
+
+.btn-primary:hover {
+    background: #e7f1dd;
+}
+
+.btn-secondary {
+    border-color: rgba(255,255,255,.3);
+    color: white;
+    background: rgba(255,255,255,.06);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.btn-light {
+    color: var(--forest);
+    background: white;
+    border-color: var(--border);
+}
+
+.welcome-image {
+    position: relative;
+    min-width: 0;
+    min-height: 250px;
+}
+
+.welcome-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg,var(--forest),rgba(23,61,43,.22) 55%,transparent);
+    pointer-events: none;
+}
+
+.welcome-image img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+}
+
+.banner-floating {
+    position: absolute;
+    z-index: 3;
+    right: 15px;
+    bottom: 15px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,.95);
+    color: var(--forest);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.banner-floating strong {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 16px;
+}
+
+.banner-floating span {
+    display: block;
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    min-width: 0;
+    padding: 17px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 15px;
+}
+
+.stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 14px;
+}
+
+.stat-trend {
+    font-size: 8px;
+    color: #548354;
+    font-weight: 700;
+    background: #eef6e9;
+    border-radius: 6px;
+    padding: 5px 6px;
+}
+
+.stat-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+.stat-card p {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 31px;
+}
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: white;
+    text-align: left;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.category-image {
+    height: 112px;
+    overflow: hidden;
+    background: #e8eee4;
+}
+
+.category-image img {
+    height: 100%;
+    transition: transform .4s;
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.05);
+}
+
+.category-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+    padding: 12px;
+}
+
+.category-details strong {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.category-details span {
+    color: var(--green);
+    font-size: 10px;
+}
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 16px;
+    margin-bottom: 31px;
+}
+
+.product-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: white;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.product-image {
+    height: 175px;
+    position: relative;
+    overflow: hidden;
+    background: #e9eee5;
+}
+
+.product-image img {
+    height: 100%;
+    transition: transform .4s;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,.95);
+    color: var(--forest);
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.product-heart {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.8);
+    background: rgba(255,255,255,.93);
+    color: #738274;
+    font-size: 12px;
+}
+
+.product-info {
+    padding: 14px;
+}
+
+.product-category {
+    font-size: 8px;
+    letter-spacing: 1.1px;
+    color: var(--green);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.product-info h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.product-description {
+    margin-top: 6px;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+    min-height: 34px;
+}
+
+.product-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 13px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.product-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--forest);
+}
+
+.product-price small {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.add-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 33px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--forest);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.add-button:hover {
+    background: var(--green);
+}
+
+/* =====================================================
+   LOWER CONTENT
+===================================================== */
+
+.lower-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.content-card {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: white;
+}
+
+.content-card .section-heading {
+    margin-bottom: 16px;
+}
+
+.content-card .section-heading h2 {
+    font-size: 19px;
+}
+
+.care-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.care-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+}
+
+.care-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: #edf4e8;
+    border-radius: 10px;
+    color: var(--green);
+}
+
+.care-item h4 {
+    font-size: 11px;
+    margin: 2px 0 5px;
+}
+
+.care-item p {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.activity-item:first-child {
+    padding-top: 0;
+}
+
+.activity-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.activity-image {
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #e8eee4;
+}
+
+.activity-image img {
+    height: 100%;
+}
+
+.activity-copy {
+    min-width: 0;
+    flex: 1;
+}
+
+.activity-copy h4 {
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.activity-copy p {
+    font-size: 9px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.activity-status {
+    align-self: flex-start;
+    font-size: 8px;
+    font-weight: 700;
+    color: #548354;
+    background: #edf6e9;
+    padding: 6px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   ADDITIONAL GARDEN INSIGHTS
+===================================================== */
+
+.garden-insights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.insight-card {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-width: 0;
+    padding: 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.insight-image {
+    width: 95px;
+    height: 110px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #e8eee4;
+}
+
+.insight-image img {
+    height: 100%;
+}
+
+.insight-copy {
+    min-width: 0;
+}
+
+.insight-copy span {
+    color: var(--green);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.insight-copy h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    line-height: 1.3;
+    margin: 7px 0;
+}
+
+.insight-copy p {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 11px;
+}
+
+/* =====================================================
+   OTHER PAGES
+===================================================== */
+
+.page-intro {
+    padding: 27px;
+    border-radius: 18px;
+    background: #e7efe1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    margin-bottom: 24px;
+}
+
+.page-intro h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 29px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.page-intro p {
+    max-width: 500px;
+    color: #687969;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.page-intro-art {
+    width: 105px;
+    height: 105px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.65);
+    color: var(--green);
+    font-size: 38px;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.filter-button {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.filter-button.active, .filter-button:hover {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: white;
+}
+
+/* ORDERS */
+
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.order-card {
+    display: grid;
+    grid-template-columns: 75px minmax(0,1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.order-image {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    border-radius: 11px;
+    background: #e9eee5;
+}
+
+.order-image img {
+    height: 100%;
+}
+
+.order-details h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.order-details p {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.order-status {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 8px;
+    font-weight: 700;
+    color: #507f48;
+    background: #eaf4e5;
+}
+
+.order-price {
+    text-align: right;
+}
+
+.order-price strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.order-price a {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--green);
+}
+
+/* CARE PAGE */
+
+.care-hero {
+    min-height: 230px;
+    display: grid;
+    grid-template-columns: 1fr .8fr;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #e4eddd;
+    margin-bottom: 25px;
+}
+
+.care-hero-copy {
+    padding: 28px;
+}
+
+.care-hero-copy h2 {
+    max-width: 420px;
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    line-height: 1.25;
+    margin: 12px 0;
+}
+
+.care-hero-copy p {
+    max-width: 420px;
+    color: #687969;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.care-hero-image {
+    height: 230px;
+    min-width: 0;
+}
+
+.care-hero-image img {
+    height: 100%;
+}
+
+.care-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 15px;
+}
+
+.care-guide-card {
+    padding: 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.care-guide-number {
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    color: #b6c9aa;
+    margin-bottom: 13px;
+}
+
+.care-guide-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    margin: 12px 0 8px;
+}
+
+.care-guide-card p {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* PROFILE PAGE */
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 275px minmax(0,1fr);
+    gap: 18px;
+}
+
+.profile-summary {
+    padding: 26px 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    text-align: center;
+}
+
+.profile-large-avatar {
+    width: 85px;
+    height: 85px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background: #e2edd9;
+    color: var(--forest);
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.profile-summary h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.profile-summary > p {
+    margin-top: 7px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.profile-member-tag {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 8px 10px;
+    background: #edf4e8;
+    border-radius: 7px;
+    color: var(--green);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.profile-form-card {
+    padding: 23px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+}
+
+.profile-form-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.profile-form-card > p {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 15px;
+}
+
+.form-field {
+    min-width: 0;
+}
+
+.form-field label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-field input {
+    width: 100%;
+    height: 42px;
+    padding: 0 11px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    background: #fcfcf9;
+    color: var(--text);
+    font-size: 11px;
+}
+
+.form-field input:focus {
+    border-color: var(--green);
+}
+
+.form-actions {
+    margin-top: 19px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+    padding: 35px 20px;
+    text-align: center;
+    color: var(--muted);
+    background: white;
+    border: 1px dashed #d9e1d4;
+    border-radius: 14px;
+    grid-column: 1 / -1;
+}
+
+.empty-state i {
+    font-size: 26px;
+    color: var(--green);
+    margin-bottom: 11px;
+}
+
+.empty-state h3 {
+    color: var(--text);
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    margin-bottom: 7px;
+}
+
+.empty-state p {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =====================================================
+   MOBILE DRAWER
+===================================================== */
+
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(11,30,19,.55);
+    display: none;
+}
+
+.mobile-overlay.active {
+    display: block;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1200px) {
+    .dashboard-shell {
+        grid-template-columns: 235px minmax(0,1fr);
+    }
+
+    .sidebar {
+        width: 235px;
+    }
+
+    .content-area {
+        padding: 24px;
+    }
+
+    .topbar {
+        padding: 15px 24px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .product-image {
+        height: 190px;
+    }
+}
+
+@media (max-width: 900px) {
+    .dashboard-shell {
+        display: block;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: min(285px,86vw);
+        height: 100dvh;
+        transform: translateX(-105%);
+        transition: transform .3s ease;
+        z-index: 60;
+        box-shadow: 10px 0 35px rgba(0,0,0,.15);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-area {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .mobile-menu-button {
+        display: inline-flex;
+    }
+
+    .topbar {
+        min-height: 75px;
+        padding: 13px 19px;
+    }
+
+    .page-heading h1 {
+        font-size: 21px;
+    }
+
+    .content-area {
+        padding: 22px 19px 32px;
+    }
+
+    .welcome-banner {
+        grid-template-columns: 1fr .65fr;
+    }
+
+    .welcome-copy {
+        padding-left: 23px;
+    }
+
+    .welcome-copy h2 {
+        font-size: 29px;
+    }
+
+    .lower-grid, .garden-insights {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .care-guide-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .topbar {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .topbar-left {
+        gap: 9px;
+    }
+
+    .mobile-menu-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .page-heading h1 {
+        font-size: 18px;
+    }
+
+    .page-heading p {
+        font-size: 9px;
+        margin-top: 3px;
+    }
+
+    .topbar-right {
+        gap: 6px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .icon-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .content-area {
+        padding: 16px 12px 25px;
+    }
+
+    .welcome-banner {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .welcome-copy {
+        padding: 23px 19px 20px;
+    }
+
+    .welcome-copy h2 {
+        font-size: 28px;
+        margin-top: 12px;
+    }
+
+    .welcome-copy p {
+        font-size: 10px;
+    }
+
+    .welcome-image {
+        min-height: 155px;
+    }
+
+    .welcome-image::before {
+        background: linear-gradient(180deg,var(--forest),rgba(23,61,43,.02) 75%);
+    }
+
+    .banner-floating {
+        right: 11px;
+        bottom: 11px;
+        padding: 9px 11px;
+    }
+
+    .stats-grid {
+        gap: 9px;
+        margin-bottom: 25px;
+    }
+
+    .stat-card {
+        padding: 13px;
+    }
+
+    .stat-top {
+        margin-bottom: 11px;
+    }
+
+    .stat-icon {
+        width: 31px;
+        height: 31px;
+    }
+
+    .stat-trend {
+        font-size: 7px;
+        padding: 4px;
+    }
+
+    .stat-card h3 {
+        font-size: 21px;
+    }
+
+    .stat-card p {
+        font-size: 9px;
+        line-height: 1.5;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .section-heading p {
+        font-size: 10px;
+    }
+
+    .text-link {
+        font-size: 9px;
+        gap: 5px;
+        margin-top: 5px;
+    }
+
+    .category-grid {
+        gap: 9px;
+        margin-bottom: 26px;
+    }
+
+    .category-image {
+        height: 100px;
+    }
+
+    .category-details {
+        padding: 10px;
+    }
+
+    .category-details strong {
+        font-size: 9px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 10px;
+        margin-bottom: 27px;
+    }
+
+    .product-image {
+        height: 135px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+    .product-info h3 {
+        font-size: 15px;
+    }
+
+    .product-description {
+        font-size: 9px;
+        min-height: 45px;
+    }
+
+    .product-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .product-price {
+        font-size: 14px;
+    }
+
+    .add-button {
+        width: 100%;
+        min-height: 32px;
+    }
+
+    .content-card {
+        padding: 15px;
+    }
+
+    .content-card .section-heading h2 {
+        font-size: 17px;
+    }
+
+    .insight-card {
+        padding: 13px;
+        gap: 12px;
+    }
+
+    .insight-image {
+        width: 78px;
+        height: 95px;
+    }
+
+    .insight-copy h3 {
+        font-size: 16px;
+    }
+
+    .page-intro {
+        padding: 20px;
+    }
+
+    .page-intro h2 {
+        font-size: 24px;
+    }
+
+    .page-intro-art {
+        width: 65px;
+        height: 65px;
+        font-size: 25px;
+    }
+
+    .care-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .care-hero-copy {
+        padding: 21px;
+    }
+
+    .care-hero-copy h2 {
+        font-size: 26px;
+    }
+
+    .care-hero-image {
+        height: 155px;
+    }
+
+    .care-guide-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-card {
+        grid-template-columns: 60px minmax(0,1fr);
+        gap: 11px;
+        padding: 12px;
+    }
+
+    .order-image {
+        width: 60px;
+        height: 68px;
+    }
+
+    .order-details h3 {
+        font-size: 15px;
+    }
+
+    .order-price {
+        grid-column: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        gap: 10px;
+        border-top: 1px solid var(--border);
+        padding-top: 9px;
+    }
+
+    .order-price strong {
+        margin-bottom: 0;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .profile-form-card {
+        padding: 17px;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 901px) {
+    .sidebar {
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .brand {
+        padding-bottom: 14px;
+    }
+
+    .sidebar-label {
+        padding-top: 15px;
+    }
+
+    .nav-item {
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+
+    .garden-help {
+        padding: 10px;
+    }
+
+    .garden-help-icon {
+        display: none;
+    }
+
+    .garden-help p {
+        margin-bottom: 6px;
+    }
+
+    .sidebar-profile {
+        margin-top: 7px;
+        padding-top: 9px;
+        padding-bottom: 8px;
+    }
+
+    .logout-button {
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <a href="index.html" class="brand" aria-label="Greenroots Home">
+            <img src="assets/logo.webp" alt="Greenroots Logo" class="brand-logo">
+
+            <div>
+                <div class="brand-name">GREENROOTS</div>
+                <span class="brand-subtitle">FARM & NURSERY</span>
+            </div>
+        </a>
+
+        <div class="sidebar-label">MY GARDEN</div>
+
+        <nav class="sidebar-nav" aria-label="Dashboard navigation">
+
+            <button class="nav-item active"
+                    data-page="dashboard"
+                    data-title="My Garden">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-item"
+                    data-page="explore"
+                    data-title="Explore Plants">
+                <i class="fa-solid fa-seedling"></i>
+                <span>Explore Plants</span>
+                <span class="nav-count">12</span>
+            </button>
+
+            <button class="nav-item"
+                    data-page="orders"
+                    data-title="My Orders">
+                <i class="fa-solid fa-box-open"></i>
+                <span>My Orders</span>
+                <span class="nav-count">2</span>
+            </button>
+
+            <button class="nav-item"
+                    data-page="care"
+                    data-title="Plant Care">
+                <i class="fa-solid fa-droplet"></i>
+                <span>Plant Care</span>
+            </button>
+
+            <button class="nav-item"
+                    data-page="profile"
+                    data-title="My Profile">
+                <i class="fa-regular fa-user"></i>
+                <span>My Profile</span>
+            </button>
+
+        </nav>
+
+        <!-- BOTTOM AREA -->
+
+        <div class="sidebar-bottom">
+
+            <div class="garden-help">
+                <div class="garden-help-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <h4>Need plant advice?</h4>
+
+                <p>Find helpful information to keep your plants healthy and happy.</p>
+
+                <a href="404.html" class="help-link">
+                    Get plant support
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="sidebar-profile">
+                <div class="profile-avatar" id="sidebarAvatar">GM</div>
+
+                <div class="profile-meta">
+                    <strong id="sidebarUserName">Garden Member</strong>
+                    <span>Plant enthusiast</span>
+                </div>
+            </div>
+
+            <button class="logout-button" id="logoutButton">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-area">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="mobile-menu-button"
+                        id="mobileMenuButton"
+                        aria-label="Open navigation"
+                        aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="page-heading">
+                    <h1 id="pageTitle">My Garden</h1>
+                    <p id="pageSubtitle">Welcome back! Your green journey continues.</p>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <label class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search"
+                           id="globalSearch"
+                           placeholder="Search plants..."
+                           aria-label="Search plants">
+                </label>
+
+                <button class="icon-button"
+                        aria-label="Notifications"
+                        onclick="window.location.href='404.html'">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <button class="icon-button"
+                        aria-label="My profile"
+                        data-open-page="profile">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+        <div class="content-area">
+
+            <!-- ==========================================
+                 DASHBOARD
+            =========================================== -->
+
+            <section class="page-panel active" id="page-dashboard">
+
+                <div class="welcome-banner">
+
+                    <div class="welcome-copy">
+
+                        <span class="eyebrow">
+                            <i class="fa-solid fa-sun"></i>
+                            YOUR LITTLE GREEN WORLD
+                        </span>
+
+                        <h2 id="welcomeHeading">Welcome back! Grow something beautiful.</h2>
+
+                        <p id="welcomeDescription">
+                            Your garden journey continues. Discover new plants,
+                            explore our nursery collection and make more room for nature.
+                        </p>
+
+                        <div class="banner-actions">
+
+                            <button class="btn-primary" data-open-page="explore">
+                                Explore plants
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+
+                            <button class="btn-secondary" data-open-page="care">
+                                Plant care guide
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="welcome-image">
+                        <img src="assets/images/dashboard-hero.webp"
+                             alt="Beautiful green nursery garden">
+
+                        <div class="banner-floating">
+                            <strong>Grow with love.</strong>
+                            <span>A greener day starts here.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon"><i class="fa-solid fa-seedling"></i></div>
+                            <span class="stat-trend">Growing</span>
+                        </div>
+                        <h3>08</h3>
+                        <p>Plants in your garden</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <span class="stat-trend">2 active</span>
+                        </div>
+                        <h3>12</h3>
+                        <p>Total orders placed</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon"><i class="fa-solid fa-heart"></i></div>
+                            <span class="stat-trend">Your picks</span>
+                        </div>
+                        <h3>06</h3>
+                        <p>Favourite plants</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon"><i class="fa-solid fa-droplet"></i></div>
+                            <span class="stat-trend">Stay green</span>
+                        </div>
+                        <h3>04</h3>
+                        <p>Care reminders today</p>
+                    </article>
+
+                </div>
+
+                <!-- CATEGORIES -->
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Explore by category</h2>
+                        <p>Find the perfect plants for your space.</p>
+                    </div>
+
+                    <button class="text-link" data-open-page="explore">
+                        View all <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="category-grid">
+
+                    <button class="category-card"
+                            data-open-page="explore"
+                            data-filter="Indoor">
+                        <div class="category-image">
+                            <img src="assets/images/category-indoor.webp" alt="Indoor plants">
+                        </div>
+                        <div class="category-details">
+                            <strong>Indoor Plants</strong>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </button>
+
+                    <button class="category-card"
+                            data-open-page="explore"
+                            data-filter="Outdoor">
+                        <div class="category-image">
+                            <img src="assets/images/category-outdoor.webp" alt="Outdoor plants">
+                        </div>
+                        <div class="category-details">
+                            <strong>Outdoor Plants</strong>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </button>
+
+                    <button class="category-card"
+                            data-open-page="explore"
+                            data-filter="Flowering">
+                        <div class="category-image">
+                            <img src="assets/images/category-flowering.webp" alt="Flowering plants">
+                        </div>
+                        <div class="category-details">
+                            <strong>Flowering Plants</strong>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </button>
+
+                    <button class="category-card"
+                            data-open-page="explore"
+                            data-filter="Fruit">
+                        <div class="category-image">
+                            <img src="assets/images/category-fruit.webp" alt="Fruit plants">
+                        </div>
+                        <div class="category-details">
+                            <strong>Fruit Plants</strong>
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </button>
+
+                </div>
+
+                <!-- RECOMMENDED PLANTS -->
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Handpicked for you</h2>
+                        <p>Beautiful plants to brighten your everyday life.</p>
+                    </div>
+
+                    <button class="text-link" data-open-page="explore">
+                        Explore collection <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="product-grid">
+
+                    <article class="product-card" data-category="Indoor">
+                        <div class="product-image">
+                            <img src="assets/images/plant-monstera.webp" alt="Monstera Deliciosa">
+                            <span class="product-tag">BESTSELLER</span>
+                            <button class="product-heart" aria-label="View Monstera details"
+                                    onclick="window.location.href='404.html'">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Indoor collection</span>
+                            <h3>Monstera Deliciosa</h3>
+                            <p class="product-description">Bold tropical leaves for a fresh, modern interior.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹499 <small>/ plant</small></div>
+                                <button class="add-button" onclick="window.location.href='404.html'">
+                                    View plant <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Indoor">
+                        <div class="product-image">
+                            <img src="assets/images/plant-areca.webp" alt="Areca Palm">
+                            <span class="product-tag">AIR PURIFYING</span>
+                            <button class="product-heart" aria-label="View Areca Palm details"
+                                    onclick="window.location.href='404.html'">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Indoor collection</span>
+                            <h3>Areca Palm</h3>
+                            <p class="product-description">Graceful green fronds that bring tropical freshness.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹399 <small>/ plant</small></div>
+                                <button class="add-button" onclick="window.location.href='404.html'">
+                                    View plant <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Flowering">
+                        <div class="product-image">
+                            <img src="assets/images/plant-flowering.webp" alt="Flowering plant">
+                            <span class="product-tag">NURSERY PICK</span>
+                            <button class="product-heart" aria-label="View flowering plant details"
+                                    onclick="window.location.href='404.html'">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Flowering collection</span>
+                            <h3>Garden Bloom</h3>
+                            <p class="product-description">Colourful blooms to make your garden feel alive.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹299 <small>/ plant</small></div>
+                                <button class="add-button" onclick="window.location.href='404.html'">
+                                    View plant <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- CARE REMINDERS -->
+
+                <div class="lower-grid">
+
+                    <section class="content-card">
+                        <div class="section-heading">
+                            <div>
+                                <h2>Today's care reminders</h2>
+                                <p>Small habits make a greener garden.</p>
+                            </div>
+                        </div>
+
+                        <div class="care-list">
+
+                            <div class="care-item">
+                                <div class="care-icon"><i class="fa-solid fa-droplet"></i></div>
+                                <div>
+                                    <h4>Check soil moisture</h4>
+                                    <p>Check the soil before watering your plants. Water according to each plant's needs.</p>
+                                </div>
+                            </div>
+
+                            <div class="care-item">
+                                <div class="care-icon"><i class="fa-solid fa-sun"></i></div>
+                                <div>
+                                    <h4>Review sunlight</h4>
+                                    <p>Make sure your plants receive suitable light throughout the day.</p>
+                                </div>
+                            </div>
+
+                            <div class="care-item">
+                                <div class="care-icon"><i class="fa-solid fa-leaf"></i></div>
+                                <div>
+                                    <h4>Inspect the leaves</h4>
+                                    <p>Look for dry leaves, dust or early signs of pests.</p>
+                                </div>
+                            </div>
+
+                            <button class="text-link" data-open-page="care">
+                                View plant care guide <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+
+                        </div>
+                    </section>
+
+                    <section class="content-card">
+                        <div class="section-heading">
+                            <div>
+                                <h2>Recent activity</h2>
+                                <p>Your latest nursery updates.</p>
+                            </div>
+                            <button class="text-link" data-open-page="orders">View orders</button>
+                        </div>
+
+                        <div class="activity-list">
+
+                            <div class="activity-item">
+                                <div class="activity-image">
+                                    <img src="assets/images/plant-monstera.webp" alt="Monstera">
+                                </div>
+                                <div class="activity-copy">
+                                    <h4>Monstera Deliciosa</h4>
+                                    <p>Order GR-1024 · 08 Oct 2026</p>
+                                </div>
+                                <span class="activity-status">Delivered</span>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-image">
+                                    <img src="assets/images/plant-areca.webp" alt="Areca Palm">
+                                </div>
+                                <div class="activity-copy">
+                                    <h4>Areca Palm</h4>
+                                    <p>Order GR-1025 · 10 Oct 2026</p>
+                                </div>
+                                <span class="activity-status">In transit</span>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-image">
+                                    <img src="assets/images/plant-flowering.webp" alt="Garden Bloom">
+                                </div>
+                                <div class="activity-copy">
+                                    <h4>Garden Bloom</h4>
+                                    <p>New addition to the nursery collection</p>
+                                </div>
+                                <span class="activity-status">New</span>
+                            </div>
+
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- GARDENING INSIGHTS -->
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Grow your knowledge</h2>
+                        <p>Make your garden journey more rewarding.</p>
+                    </div>
+                </div>
+
+                <div class="garden-insights">
+
+                    <article class="insight-card">
+                        <div class="insight-image">
+                            <img src="assets/images/plant-care-hero.webp" alt="Plant care">
+                        </div>
+                        <div class="insight-copy">
+                            <span>PLANT CARE</span>
+                            <h3>Healthy plants begin with healthy roots.</h3>
+                            <p>Learn about soil, watering and the little things that help your plants grow.</p>
+                            <button class="text-link" data-open-page="care">
+                                Read care tips <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="insight-card">
+                        <div class="insight-image">
+                            <img src="assets/images/category-indoor.webp" alt="Indoor greenery">
+                        </div>
+                        <div class="insight-copy">
+                            <span>GREEN LIVING</span>
+                            <h3>Bring the beauty of nature indoors.</h3>
+                            <p>Discover green companions that can make your living space feel fresh.</p>
+                            <button class="text-link" data-open-page="explore">
+                                Discover plants <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- SEASONAL COLLECTION -->
+
+                <div class="welcome-banner">
+                    <div class="welcome-copy">
+                        <span class="eyebrow">
+                            <i class="fa-solid fa-leaf"></i>
+                            THE GREENROOTS COLLECTION
+                        </span>
+                        <h2>Make room for a little more green.</h2>
+                        <p>
+                            Explore leafy favourites, colourful blooms and new
+                            additions selected for your garden.
+                        </p>
+                        <div class="banner-actions">
+                            <button class="btn-primary" data-open-page="explore">
+                                Explore the collection
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="welcome-image">
+                        <img src="assets/images/category-outdoor.webp" alt="Outdoor nursery collection">
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==========================================
+                 EXPLORE PLANTS
+            =========================================== -->
+
+            <section class="page-panel" id="page-explore">
+
+                <div class="page-intro">
+                    <div>
+                        <span class="eyebrow" style="color:var(--green);">
+                            <i class="fa-solid fa-seedling"></i>
+                            OUR PLANT COLLECTION
+                        </span>
+                        <h2>Find your next green companion.</h2>
+                        <p>Discover indoor greenery, outdoor favourites, colourful blooms and fruit plants for your home and garden.</p>
+                    </div>
+                    <div class="page-intro-art">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                </div>
+
+                <div class="filter-row" id="plantFilters">
+                    <button class="filter-button active" data-filter="All">All plants</button>
+                    <button class="filter-button" data-filter="Indoor">Indoor</button>
+                    <button class="filter-button" data-filter="Outdoor">Outdoor</button>
+                    <button class="filter-button" data-filter="Flowering">Flowering</button>
+                    <button class="filter-button" data-filter="Fruit">Fruit plants</button>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Discover our plants</h2>
+                        <p>Explore our curated nursery collection.</p>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="exploreProductGrid">
+
+                    <article class="product-card" data-category="Indoor">
+                        <div class="product-image">
+                            <img src="assets/images/plant-monstera.webp" alt="Monstera">
+                            <span class="product-tag">POPULAR</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Indoor</span>
+                            <h3>Monstera Deliciosa</h3>
+                            <p class="product-description">Statement foliage for your living space.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹499</div>
+                                <button class="add-button" onclick="window.location.href='404.html'">View plant <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Indoor">
+                        <div class="product-image">
+                            <img src="assets/images/plant-areca.webp" alt="Areca Palm">
+                            <span class="product-tag">EASY CARE</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Indoor</span>
+                            <h3>Areca Palm</h3>
+                            <p class="product-description">Elegant fronds for a refreshing atmosphere.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹399</div>
+                                <button class="add-button" onclick="window.location.href='404.html'">View plant <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Flowering">
+                        <div class="product-image">
+                            <img src="assets/images/plant-flowering.webp" alt="Flowering plant">
+                            <span class="product-tag">BLOOMING</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Flowering</span>
+                            <h3>Garden Bloom</h3>
+                            <p class="product-description">Bright flowers for colourful garden corners.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹299</div>
+                                <button class="add-button" onclick="window.location.href='404.html'">View plant <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Outdoor">
+                        <div class="product-image">
+                            <img src="assets/images/plant-outdoor.webp" alt="Outdoor plant">
+                            <span class="product-tag">GARDEN PICK</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Outdoor</span>
+                            <h3>Garden Green</h3>
+                            <p class="product-description">Fresh foliage for your outdoor spaces.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹349</div>
+                                <button class="add-button" onclick="window.location.href='404.html'">View plant <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Fruit">
+                        <div class="product-image">
+                            <img src="assets/images/plant-fruit.webp" alt="Fruit plant">
+                            <span class="product-tag">GROW YOUR OWN</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fruit</span>
+                            <h3>Fruit Sapling</h3>
+                            <p class="product-description">Start growing your own little fruit garden.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹249</div>
+                                <button class="add-button" onclick="window.location.href='404.html'">View plant <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="Outdoor">
+                        <div class="product-image">
+                            <img src="assets/images/plant-garden.webp" alt="Garden foliage">
+                            <span class="product-tag">NURSERY PICK</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Outdoor</span>
+                            <h3>Garden Foliage</h3>
+                            <p class="product-description">Beautiful foliage for a lush outdoor setting.</p>
+                            <div class="product-bottom">
+                                <div class="product-price">₹299</div>
+                                <button class="add-button" onclick="window.location.href='404.html'">View plant <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- ==========================================
+                 MY ORDERS
+            =========================================== -->
+
+            <section class="page-panel" id="page-orders">
+
+                <div class="page-intro">
+                    <div>
+                        <span class="eyebrow" style="color:var(--green);">
+                            <i class="fa-solid fa-box-open"></i>
+                            YOUR NURSERY PURCHASES
+                        </span>
+                        <h2>Your plants are on their way.</h2>
+                        <p>Review your recent purchases and check the current status of your nursery orders.</p>
+                    </div>
+                    <div class="page-intro-art">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-box"></i></div></div>
+                        <h3>12</h3><p>Total orders</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-truck"></i></div></div>
+                        <h3>02</h3><p>In progress</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div></div>
+                        <h3>10</h3><p>Completed orders</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-heart"></i></div></div>
+                        <h3>06</h3><p>Favourite plants</p>
+                    </article>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Recent orders</h2>
+                        <p>Order details and delivery updates.</p>
+                    </div>
+                </div>
+
+                <div class="order-list">
+
+                    <article class="order-card">
+                        <div class="order-image">
+                            <img src="assets/images/plant-monstera.webp" alt="Monstera">
+                        </div>
+                        <div class="order-details">
+                            <h3>Monstera Deliciosa</h3>
+                            <p>Order ID: GR-1024 · 08 Oct 2026</p>
+                            <p>Quantity: 1 plant · Nursery collection</p>
+                            <span class="order-status">Delivered successfully</span>
+                        </div>
+                        <div class="order-price">
+                            <strong>₹499</strong>
+                            <a href="404.html">View details <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="order-card">
+                        <div class="order-image">
+                            <img src="assets/images/plant-areca.webp" alt="Areca Palm">
+                        </div>
+                        <div class="order-details">
+                            <h3>Areca Palm</h3>
+                            <p>Order ID: GR-1025 · 10 Oct 2026</p>
+                            <p>Quantity: 1 plant · Nursery collection</p>
+                            <span class="order-status">Preparing for delivery</span>
+                        </div>
+                        <div class="order-price">
+                            <strong>₹399</strong>
+                            <a href="404.html">View details <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="order-card">
+                        <div class="order-image">
+                            <img src="assets/images/plant-flowering.webp" alt="Flowering plant">
+                        </div>
+                        <div class="order-details">
+                            <h3>Garden Bloom</h3>
+                            <p>Order ID: GR-1019 · 02 Oct 2026</p>
+                            <p>Quantity: 2 plants · Nursery collection</p>
+                            <span class="order-status">Delivered successfully</span>
+                        </div>
+                        <div class="order-price">
+                            <strong>₹598</strong>
+                            <a href="404.html">View details <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- ==========================================
+                 PLANT CARE
+            =========================================== -->
+
+            <section class="page-panel" id="page-care">
+
+                <div class="care-hero">
+                    <div class="care-hero-copy">
+                        <span class="eyebrow" style="color:var(--green);">
+                            <i class="fa-solid fa-leaf"></i>
+                            GROW WITH CONFIDENCE
+                        </span>
+                        <h2>A little care goes a long way.</h2>
+                        <p>Learn how to give your green companions the water, light and attention they need to thrive.</p>
+                    </div>
+                    <div class="care-hero-image">
+                        <img src="assets/images/plant-care-hero.webp" alt="Caring for a plant">
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Your plant care guide</h2>
+                        <p>Simple steps to help your plants flourish.</p>
+                    </div>
+                </div>
+
+                <div class="care-guide-grid">
+
+                    <article class="care-guide-card">
+                        <div class="care-guide-number">01</div>
+                        <div class="care-icon"><i class="fa-solid fa-droplet"></i></div>
+                        <h3>Water wisely</h3>
+                        <p>Feel the soil before watering. Water thoroughly when needed, and make sure excess water can drain away.</p>
+                    </article>
+
+                    <article class="care-guide-card">
+                        <div class="care-guide-number">02</div>
+                        <div class="care-icon"><i class="fa-solid fa-sun"></i></div>
+                        <h3>Understand sunlight</h3>
+                        <p>Check each plant's light requirements. Some plants prefer indirect light while others need direct sun.</p>
+                    </article>
+
+                    <article class="care-guide-card">
+                        <div class="care-guide-number">03</div>
+                        <div class="care-icon"><i class="fa-solid fa-wind"></i></div>
+                        <h3>Give roots room</h3>
+                        <p>Choose containers with drainage holes and suitable potting mix. Repot when roots outgrow their container.</p>
+                    </article>
+
+                    <article class="care-guide-card">
+                        <div class="care-guide-number">04</div>
+                        <div class="care-icon"><i class="fa-solid fa-leaf"></i></div>
+                        <h3>Keep leaves healthy</h3>
+                        <p>Remove dead leaves and gently clean dusty foliage. Check leaves regularly for signs of pests.</p>
+                    </article>
+
+                    <article class="care-guide-card">
+                        <div class="care-guide-number">05</div>
+                        <div class="care-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <h3>Feed at the right time</h3>
+                        <p>Use a suitable fertiliser when needed. Follow product instructions and avoid applying more than recommended.</p>
+                    </article>
+
+                    <article class="care-guide-card">
+                        <div class="care-guide-number">06</div>
+                        <div class="care-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h3>Observe and learn</h3>
+                        <p>Notice changes in leaf colour, growth and soil moisture. Adjust care according to the plant and season.</p>
+                    </article>
+
+                </div>
+
+                <div style="margin-top:23px;">
+                    <a href="404.html" class="btn-light">
+                        <i class="fa-solid fa-book-open"></i>
+                        Explore complete plant guide
+                    </a>
+                </div>
+
+            </section>
+
+            <!-- ==========================================
+                 PROFILE
+            =========================================== -->
+
+            <section class="page-panel" id="page-profile">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Your garden profile</h2>
+                        <p>Review your membership and profile information.</p>
+                    </div>
+                </div>
+
+                <div class="profile-layout">
+
+                    <section class="profile-summary">
+                        <div class="profile-large-avatar" id="profileLargeAvatar">GM</div>
+                        <h2 id="profileDisplayName">Garden Member</h2>
+                        <p>GREENROOTS Nursery Community</p>
+
+                        <span class="profile-member-tag">
+                            <i class="fa-solid fa-leaf"></i>
+                            GREEN MEMBER
+                        </span>
+
+                        <div style="width:100%;margin-top:24px;border-top:1px solid var(--border);padding-top:19px;text-align:left;">
+
+                            <div class="care-item" style="margin-bottom:16px;">
+                                <div class="care-icon"><i class="fa-solid fa-seedling"></i></div>
+                                <div>
+                                    <h4>Garden collection</h4>
+                                    <p>8 plants in your collection</p>
+                                </div>
+                            </div>
+
+                            <div class="care-item">
+                                <div class="care-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                                <div>
+                                    <h4>Shopping history</h4>
+                                    <p>12 demo orders recorded</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section class="profile-form-card">
+                        <h2>Personal information</h2>
+                        <p>This is a static profile preview. Changes are not saved to a database.</p>
+
+                        <form id="profileForm">
+                            <div class="form-grid">
+
+                                <div class="form-field">
+                                    <label for="profileName">Full name</label>
+                                    <input type="text" id="profileName" value="Garden Member" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="profileEmail">Email address</label>
+                                    <input type="email" id="profileEmail" value="member@example.com" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="profilePhone">Phone number</label>
+                                    <input type="tel" id="profilePhone" value="9876543210"
+                                           inputmode="numeric" pattern="[0-9]{10}"
+                                           maxlength="10" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="profileCity">City</label>
+                                    <input type="text" id="profileCity" value="Chennai">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="profileInterest">Favourite plant type</label>
+                                    <input type="text" id="profileInterest" value="Indoor plants">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="profileMember">Membership</label>
+                                    <input type="text" id="profileMember" value="Green Member" readonly>
+                                </div>
+
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary"
+                                        style="background:var(--forest);color:white;">
+                                    <i class="fa-solid fa-check"></i>
+                                    Preview changes
+                                </button>
+
+                                <button type="reset" class="btn-light">Reset form</button>
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("mobileOverlay");
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
+
+    const navItems = document.querySelectorAll(".nav-item[data-page]");
+    const panels = document.querySelectorAll(".page-panel");
+
+    const pageTitle = document.getElementById("pageTitle");
+    const pageSubtitle = document.getElementById("pageSubtitle");
+    const globalSearch = document.getElementById("globalSearch");
+
+    const pageSubtitles = {
+        dashboard: "Your green journey continues.",
+        explore: "Discover plants for your home and garden.",
+        orders: "Keep track of your nursery purchases.",
+        care: "Learn how to help your plants thrive.",
+        profile: "Manage your garden membership details."
+    };
+
+    /* =========================================
+       SHOW LOGGED-IN USER NAME
+       Read from URL: ?name=Ajith
+    ========================================= */
+
+    const urlParameters = new URLSearchParams(window.location.search);
+
+    const nameFromUrl = urlParameters.get("name");
+
+    const safeName = nameFromUrl
+        ? nameFromUrl.trim().slice(0, 60)
+        : "";
+
+    const userName = safeName || "Garden Member";
+
+    const firstName = userName.split(/\s+/)[0];
+
+    const initials = userName
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(part => part.charAt(0).toUpperCase())
+        .join("") || "GM";
+
+    document.getElementById("welcomeHeading").textContent =
+        "Welcome back, " + firstName + "!";
+
+    document.getElementById("welcomeDescription").textContent =
+        "Your garden journey continues, " + firstName +
+        ". Discover new plants, explore our nursery collection and make more room for nature.";
+
+    document.getElementById("sidebarUserName").textContent = userName;
+    document.getElementById("sidebarAvatar").textContent = initials;
+    document.getElementById("profileLargeAvatar").textContent = initials;
+    document.getElementById("profileDisplayName").textContent = userName;
+    document.getElementById("profileName").value = userName;
+
+    /* =========================================
+       MOBILE SIDEBAR OPEN / CLOSE
+    ========================================= */
+
+    function openSidebar() {
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+
+        mobileMenuButton.setAttribute("aria-expanded", "true");
+        mobileMenuButton.setAttribute("aria-label", "Close navigation");
+        mobileMenuButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+        mobileMenuButton.setAttribute("aria-label", "Open navigation");
+        mobileMenuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }
+
+    mobileMenuButton.addEventListener("click", () => {
+        sidebar.classList.contains("open")
+            ? closeSidebar()
+            : openSidebar();
+    });
+
+    overlay.addEventListener("click", closeSidebar);
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeSidebar();
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) closeSidebar();
+    });
+
+    /* =========================================
+       SWITCH SIDEBAR CONTENT
+    ========================================= */
+
+    function showPage(pageName, title) {
+        const targetPanel = document.getElementById("page-" + pageName);
+
+        if (!targetPanel) return;
+
+        panels.forEach(panel => panel.classList.remove("active"));
+        targetPanel.classList.add("active");
+
+        navItems.forEach(item => {
+            const active = item.dataset.page === pageName;
+
+            item.classList.toggle("active", active);
+
+            if (active) {
+                item.setAttribute("aria-current", "page");
+            } else {
+                item.removeAttribute("aria-current");
+            }
+        });
+
+        pageTitle.textContent = title || "My Garden";
+        pageSubtitle.textContent =
+            pageName === "dashboard"
+                ? "Welcome back, " + firstName + "! Your green journey continues."
+                : pageSubtitles[pageName] || "Welcome to GREENROOTS.";
+
+        closeSidebar();
+
+        if (globalSearch) globalSearch.value = "";
+
+        const emptyMessage = document.getElementById("searchEmptyState");
+        if (emptyMessage) emptyMessage.remove();
+
+        document.querySelectorAll("#exploreProductGrid .product-card")
+            .forEach(card => card.style.display = "");
+
+        document.querySelectorAll("#plantFilters .filter-button")
+            .forEach(button => {
+                button.classList.toggle("active", button.dataset.filter === "All");
+            });
+
+        // Scroll the content panel back to its top without scrolling the sidebar.
+        document.querySelector(".content-area").scrollTop = 0;
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener("click", () => {
+            showPage(item.dataset.page, item.dataset.title);
+        });
+    });
+
+    /* =========================================
+       INTERNAL DASHBOARD NAVIGATION
+    ========================================= */
+
+    document.querySelectorAll("[data-open-page]").forEach(button => {
+        button.addEventListener("click", () => {
+            const pageName = button.dataset.openPage;
+
+            const matchingNav = Array.from(navItems).find(
+                item => item.dataset.page === pageName
+            );
+
+            showPage(
+                pageName,
+                matchingNav ? matchingNav.dataset.title : undefined
+            );
+
+            if (button.dataset.filter) {
+                filterExplorePlants(button.dataset.filter);
+            }
+        });
+    });
+
+    /* =========================================
+       PLANT CATEGORY FILTERS
+    ========================================= */
+
+    function filterExplorePlants(category) {
+        document.querySelectorAll("#exploreProductGrid .product-card")
+            .forEach(card => {
+                card.style.display =
+                    category === "All" || card.dataset.category === category
+                        ? ""
+                        : "none";
+            });
+
+        const emptyMessage = document.getElementById("searchEmptyState");
+        if (emptyMessage) emptyMessage.remove();
+
+        document.querySelectorAll("#plantFilters .filter-button")
+            .forEach(button => {
+                button.classList.toggle(
+                    "active",
+                    button.dataset.filter === category
+                );
+            });
+    }
+
+    document.querySelectorAll("#plantFilters .filter-button")
+        .forEach(button => {
+            button.addEventListener("click", () => {
+                filterExplorePlants(button.dataset.filter);
+            });
+        });
+
+    /* =========================================
+       SEARCH PLANTS
+    ========================================= */
+
+    function runPlantSearch() {
+        const query = globalSearch.value.trim().toLowerCase();
+
+        showPage("explore", "Explore Plants");
+
+        const cards = document.querySelectorAll(
+            "#exploreProductGrid .product-card"
+        );
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const matches = card.textContent.toLowerCase().includes(query);
+
+            card.style.display = matches ? "" : "none";
+
+            if (matches) visibleCount++;
+        });
+
+        const oldMessage = document.getElementById("searchEmptyState");
+        if (oldMessage) oldMessage.remove();
+
+        if (query && visibleCount === 0) {
+            const emptyMessage = document.createElement("div");
+
+            emptyMessage.id = "searchEmptyState";
+            emptyMessage.className = "empty-state";
+
+            emptyMessage.innerHTML = `
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <h3>No plants found</h3>
+                <p>Try another plant name or search term.</p>
+            `;
+
+            document.getElementById("exploreProductGrid")
+                .appendChild(emptyMessage);
+        }
+
+        if (!query) {
+            document.querySelectorAll("#plantFilters .filter-button")
+                .forEach(button => {
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.filter === "All"
+                    );
+                });
+        }
+    }
+
+    globalSearch.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            runPlantSearch();
+        }
+
+        if (event.key === "Escape") {
+            globalSearch.value = "";
+
+            document.querySelectorAll("#exploreProductGrid .product-card")
+                .forEach(card => card.style.display = "");
+
+            const emptyMessage = document.getElementById("searchEmptyState");
+            if (emptyMessage) emptyMessage.remove();
+        }
+    });
+
+    /* =========================================
+       STATIC PROFILE PREVIEW
+    ========================================= */
+
+    document.getElementById("profileForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+
+        if (!form.reportValidity()) return;
+
+        const name = document.getElementById("profileName").value.trim();
+
+        if (!name) return;
+
+        const nameInitials = name
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map(part => part.charAt(0).toUpperCase())
+            .join("");
+
+        document.getElementById("sidebarAvatar").textContent = nameInitials;
+        document.getElementById("profileLargeAvatar").textContent = nameInitials;
+        document.getElementById("sidebarUserName").textContent = name;
+        document.getElementById("profileDisplayName").textContent = name;
+
+        alert(
+            "Profile preview updated. Changes are not saved permanently in this static demo."
+        );
+    });
+
+    /* =========================================
+       LOGOUT
+       Change index.html if your login page has
+       a different filename.
+    ========================================= */
+
+    document.getElementById("logoutButton").addEventListener("click", () => {
+        window.location.href = "index.html";
+    });
+
+    /* INITIAL PAGE */
+
+    showPage("dashboard", "My Garden");
+
+});
+</script>
+
+</body>
+</html>
