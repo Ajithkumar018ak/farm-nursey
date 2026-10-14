@@ -311,3 +311,93 @@ document.addEventListener("DOMContentLoaded", () => {
     startPreloader();
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   VERDANT PRELOADER — FAST EXIT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const preloader = document.getElementById("farmPreloader");
+    const percentage = document.getElementById("loaderPercentage");
+    const progressBar = document.getElementById("loaderProgressBar");
+
+    if (!preloader) return;
+
+    const startTime = performance.now();
+    const duration = 1800;
+
+    let animationFrame;
+    let isFinished = false;
+
+    function updatePreloader(currentTime) {
+
+        if (isFinished) return;
+
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(easedProgress * 100);
+
+        if (percentage) {
+            percentage.textContent = String(value).padStart(2, "0");
+        }
+
+        if (progressBar) {
+            progressBar.style.width = `${value}%`;
+        }
+
+        if (progress < 1) {
+            animationFrame = requestAnimationFrame(updatePreloader);
+        } else {
+            finishPreloader();
+        }
+    }
+
+    function finishPreloader() {
+
+        if (isFinished) return;
+
+        isFinished = true;
+
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+        }
+
+        if (percentage) {
+            percentage.textContent = "100";
+        }
+
+        if (progressBar) {
+            progressBar.style.width = "100%";
+        }
+
+        preloader.classList.add("preloader-finished");
+
+        preloader.style.transition = "opacity 0.45s ease, visibility 0.45s ease";
+        preloader.style.opacity = "0";
+        preloader.style.visibility = "hidden";
+        preloader.style.pointerEvents = "none";
+
+        setTimeout(() => {
+            preloader.style.display = "none";
+        }, 500);
+    }
+
+    animationFrame = requestAnimationFrame(updatePreloader);
+
+    // Safety fallback: preloader cannot remain visible indefinitely.
+    setTimeout(finishPreloader, 2400);
+
+});

@@ -7770,3 +7770,1100 @@ body.drawer-open {
 
 
 
+
+/* =========================================================
+   VERDANT — COMPACT PREMIUM FOOTER
+========================================================= */
+
+.site-footer {
+    position: relative;
+    width: 100%;
+    background: #14251a;
+    color: #f4f4e9;
+    overflow: hidden;
+}
+
+/* =========================================================
+   FOOTER TOP
+========================================================= */
+
+.footer-top {
+    width: min(100% - 100px, 1380px);
+    margin: 0 auto;
+    padding: 55px 0 42px;
+
+    display: grid;
+    grid-template-columns: 1.15fr 0.7fr 0.85fr 1.15fr;
+    gap: 42px;
+
+    align-items: start;
+}
+
+/* =========================================================
+   FOOTER BRAND
+========================================================= */
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 115px;
+    height: auto;
+    margin-bottom: 14px;
+}
+
+.footer-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 65px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.footer-description {
+    max-width: 260px;
+    margin: 0 0 20px;
+
+    color: rgba(244, 244, 233, 0.68);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   SOCIAL MEDIA
+========================================================= */
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.footer-socials a {
+    width: 35px;
+    height: 35px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(244, 244, 233, 0.2);
+    border-radius: 50%;
+
+    color: #f4f4e9;
+    font-size: 13px;
+    text-decoration: none;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.footer-socials a:hover {
+    background: #668f61;
+    border-color: #668f61;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+/* =========================================================
+   FOOTER COLUMNS
+========================================================= */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.footer-heading {
+    display: block;
+    margin: 5px 0 20px;
+
+    color: #ffffff;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   QUICK LINKS & COLLECTIONS
+========================================================= */
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+}
+
+.footer-links a {
+    display: inline-block;
+
+    color: rgba(244, 244, 233, 0.68);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+
+    line-height: 1.5;
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+/* =========================================================
+   CONTACT DETAILS
+========================================================= */
+
+.footer-contact {
+    gap: 0;
+}
+
+.footer-contact .footer-heading {
+    margin-bottom: 19px;
+}
+
+.footer-contact-link,
+.footer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    width: 100%;
+    margin-bottom: 13px;
+
+    color: rgba(244, 244, 233, 0.7);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+
+    line-height: 1.7;
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+}
+
+.footer-contact-link i,
+.footer-note i {
+    flex: 0 0 15px;
+    width: 15px;
+
+    margin-top: 4px;
+
+    color: #91b18a;
+    font-size: 13px;
+    text-align: center;
+}
+
+.footer-contact-link:hover {
+    color: #ffffff;
+}
+
+/* =========================================================
+   VISIT NURSERY
+========================================================= */
+
+.footer-contact-link.visit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    width: auto;
+    margin-top: 2px;
+    margin-bottom: 20px;
+
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: color 0.25s ease;
+}
+
+.footer-contact-link.visit-link i {
+    flex: initial;
+    width: auto;
+    margin-top: 0;
+
+    font-size: 11px;
+}
+
+.footer-contact-link.visit-link:hover {
+    color: #a9c9a2;
+}
+
+/* =========================================================
+   EMAIL SUBSCRIBE
+========================================================= */
+
+.footer-subscribe {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    width: 100%;
+    max-width: 290px;
+    margin-top: 2px;
+}
+
+.subscribe-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    min-height: 43px;
+    padding: 0 13px;
+
+    border: 1px solid rgba(244, 244, 233, 0.22);
+    border-radius: 3px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    transition: border-color 0.25s ease;
+}
+
+.subscribe-input:focus-within {
+    border-color: #91b18a;
+}
+
+.subscribe-input > i {
+    flex: 0 0 auto;
+
+    color: #91b18a;
+    font-size: 13px;
+}
+
+.subscribe-input input {
+    width: 100%;
+    min-width: 0;
+    height: 40px;
+
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+}
+
+.subscribe-input input::placeholder {
+    color: rgba(244, 244, 233, 0.48);
+}
+
+/* =========================================================
+   SUBSCRIBE BUTTON
+========================================================= */
+
+.subscribe-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
+    min-height: 41px;
+    padding: 0 14px;
+
+    border: 1px solid #668f61;
+    border-radius: 3px;
+
+    background: #668f61;
+    color: #ffffff;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.subscribe-button i {
+    font-size: 12px;
+    transition: transform 0.25s ease;
+}
+
+.subscribe-button:hover {
+    background: #54794f;
+    border-color: #54794f;
+}
+
+.subscribe-button:hover i {
+    transform: translateX(4px);
+}
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+    width: min(100% - 100px, 1380px);
+    min-height: 65px;
+
+    margin: 0 auto;
+    padding: 16px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-top: 1px solid rgba(244, 244, 233, 0.14);
+}
+
+.footer-bottom > span {
+    color: rgba(244, 244, 233, 0.55);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+
+    letter-spacing: 0.8px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+.back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #f4f4e9;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1.1px;
+    cursor: pointer;
+}
+
+.back-top-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(244, 244, 233, 0.28);
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.back-to-top:hover .back-top-button {
+    background: #668f61;
+    border-color: #668f61;
+    transform: translateY(-3px);
+}
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    .footer-top {
+        width: calc(100% - 64px);
+
+        grid-template-columns: 1fr 1fr;
+        gap: 38px 50px;
+
+        padding: 45px 0 35px;
+    }
+
+    .footer-brand {
+        padding-right: 20px;
+    }
+
+    .footer-description {
+        max-width: 300px;
+    }
+
+    .footer-bottom {
+        width: calc(100% - 64px);
+    }
+
+    .footer-subscribe {
+        max-width: 340px;
+    }
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .footer-top {
+        width: calc(100% - 40px);
+
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 20px;
+
+        padding: 36px 0 30px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        padding-right: 0;
+    }
+
+    .footer-logo {
+        width: 105px;
+        margin-bottom: 11px;
+    }
+
+    .footer-logo img {
+        max-height: 58px;
+    }
+
+    .footer-description {
+        max-width: 280px;
+        margin-bottom: 16px;
+
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .footer-socials {
+        gap: 8px;
+    }
+
+    .footer-socials a {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .footer-heading {
+        margin: 3px 0 15px;
+        font-size: 10px;
+        letter-spacing: 1.3px;
+    }
+
+    .footer-links {
+        gap: 10px;
+    }
+
+    .footer-links a {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .footer-contact {
+        grid-column: 1 / -1;
+    }
+
+    .footer-contact .footer-heading {
+        margin-bottom: 16px;
+    }
+
+    .footer-contact-link,
+    .footer-note {
+        gap: 9px;
+        margin-bottom: 11px;
+        font-size: 12px;
+    }
+
+    .footer-contact-link.visit-link {
+        margin-bottom: 16px;
+    }
+
+    .footer-subscribe {
+        max-width: 100%;
+    }
+
+    .subscribe-input {
+        min-height: 42px;
+    }
+
+    .subscribe-input input {
+        height: 38px;
+        font-size: 12px;
+    }
+
+    .subscribe-button {
+        min-height: 40px;
+    }
+
+    .footer-bottom {
+        width: calc(100% - 40px);
+        min-height: auto;
+
+        padding: 17px 0;
+
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .footer-bottom > span {
+        max-width: 230px;
+        font-size: 9px;
+        line-height: 1.8;
+    }
+
+    .back-to-top {
+        gap: 8px;
+        font-size: 9px;
+        letter-spacing: 0.6px;
+    }
+
+    .back-top-button {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .footer-top {
+        width: calc(100% - 32px);
+        column-gap: 14px;
+    }
+
+    .footer-bottom {
+        width: calc(100% - 32px);
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .footer-bottom > span {
+        max-width: 100%;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .site-footer *,
+    .site-footer *::before,
+    .site-footer *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+
+
+
+
+
+
+/* =========================================================
+   VERDANT FOOTER — ALIGNMENT FIX
+========================================================= */
+
+.site-footer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.site-footer *,
+.site-footer *::before,
+.site-footer *::after {
+    box-sizing: border-box;
+}
+
+/* FOOTER GRID */
+
+.site-footer .footer-top {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(0, 0.7fr)
+        minmax(0, 0.85fr)
+        minmax(0, 1.15fr);
+
+    align-items: start;
+    justify-content: space-between;
+
+    gap: 36px;
+
+    width: min(100% - 100px, 1380px);
+    margin-inline: auto;
+}
+
+/* RESET COLUMN ALIGNMENT */
+
+.site-footer .footer-brand,
+.site-footer .footer-column {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* BRAND */
+
+.site-footer .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin: 0 0 14px;
+}
+
+.site-footer .footer-logo img {
+    display: block;
+    width: 115px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.site-footer .footer-description {
+    width: 100%;
+    max-width: 260px;
+
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+/* SOCIAL ICONS */
+
+.site-footer .footer-socials {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 9px;
+    margin: 0;
+}
+
+/* COLUMN HEADINGS */
+
+.site-footer .footer-heading {
+    display: block;
+    width: 100%;
+
+    margin: 5px 0 20px;
+    padding: 0;
+
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* QUICK LINKS AND COLLECTIONS */
+
+.site-footer .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 100%;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+}
+
+.site-footer .footer-links a {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* CONTACT COLUMN */
+
+.site-footer .footer-contact {
+    align-items: flex-start;
+}
+
+.site-footer .footer-contact .footer-heading {
+    margin-bottom: 19px;
+}
+
+.site-footer .footer-contact-link,
+.site-footer .footer-note {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 100%;
+    max-width: 100%;
+
+    gap: 10px;
+    margin: 0 0 13px;
+    padding: 0;
+
+    text-align: left;
+    line-height: 1.7;
+}
+
+.site-footer .footer-contact-link > i,
+.site-footer .footer-note > i {
+    flex: 0 0 15px;
+    width: 15px;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.site-footer .footer-contact-link > span,
+.site-footer .footer-note > span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* VISIT NURSERY */
+
+.site-footer .footer-contact-link.visit-link {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin: 2px 0 20px;
+    gap: 9px;
+}
+
+.site-footer .footer-contact-link.visit-link > i {
+    flex: 0 0 auto;
+    width: auto;
+    margin: 0;
+}
+
+/* SUBSCRIBE FORM */
+
+.site-footer .footer-subscribe {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 100%;
+    max-width: 100%;
+    margin: 2px 0 0;
+    padding: 0;
+    gap: 9px;
+}
+
+.site-footer .subscribe-input {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+.site-footer .subscribe-input input {
+    flex: 1;
+    min-width: 0;
+}
+
+.site-footer .subscribe-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    margin: 0;
+}
+
+/* FOOTER BOTTOM */
+
+.site-footer .footer-bottom {
+    width: min(100% - 100px, 1380px);
+    margin-inline: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.site-footer .footer-bottom > span {
+    margin: 0;
+    text-align: left;
+}
+
+.site-footer .back-to-top {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    .site-footer .footer-top {
+        width: calc(100% - 64px);
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 38px 40px;
+    }
+
+    .site-footer .footer-bottom {
+        width: calc(100% - 64px);
+    }
+
+    .site-footer .footer-brand {
+        grid-column: auto;
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .site-footer .footer-top {
+        width: calc(100% - 40px);
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+
+        gap: 32px 20px;
+        padding-block: 36px 30px;
+    }
+
+    .site-footer .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer .footer-brand,
+    .site-footer .footer-column {
+        min-width: 0;
+    }
+
+    .site-footer .footer-description {
+        max-width: 280px;
+    }
+
+    .site-footer .footer-contact {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer .footer-bottom {
+        width: calc(100% - 40px);
+        align-items: center;
+        gap: 14px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    .site-footer .footer-top,
+    .site-footer .footer-bottom {
+        width: calc(100% - 32px);
+    }
+
+    .site-footer .footer-top {
+        column-gap: 14px;
+    }
+
+    .site-footer .footer-bottom {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+}
+
+
+
+
+
+
+
+
+/* =========================================================
+   VERDANT FOOTER — MOBILE SINGLE COLUMN
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* MAIN FOOTER LAYOUT */
+    .site-footer .footer-top {
+        width: calc(100% - 40px);
+
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+
+        padding: 35px 0 30px;
+        margin: 0 auto;
+    }
+
+    /* ALL SECTIONS — ONE BY ONE */
+    .site-footer .footer-brand,
+    .site-footer .footer-column,
+    .site-footer .footer-contact {
+        grid-column: 1 / -1;
+
+        width: 100%;
+        min-width: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin: 0;
+        padding: 0;
+    }
+
+    /* BRAND */
+    .site-footer .footer-logo {
+        width: 105px;
+        margin-bottom: 12px;
+    }
+
+    .site-footer .footer-description {
+        max-width: 300px;
+        margin-bottom: 16px;
+    }
+
+    /* SECTION HEADINGS */
+    .site-footer .footer-heading {
+        margin: 0 0 14px;
+        text-align: left;
+    }
+
+    /* LINKS */
+    .site-footer .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        width: 100%;
+        gap: 10px;
+    }
+
+    .site-footer .footer-links a {
+        text-align: left;
+    }
+
+    /* CONTACT DETAILS */
+    .site-footer .footer-contact-link,
+    .site-footer .footer-note {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    /* SUBSCRIBE FORM */
+    .site-footer .footer-subscribe {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 4px;
+    }
+
+    /* FOOTER BOTTOM */
+    .site-footer .footer-bottom {
+        width: calc(100% - 40px);
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        gap: 16px;
+        padding: 18px 0;
+    }
+
+    .site-footer .footer-bottom > span {
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .site-footer .back-to-top {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+/* EXTRA SMALL MOBILE */
+@media (max-width: 380px) {
+
+    .site-footer .footer-top,
+    .site-footer .footer-bottom {
+        width: calc(100% - 32px);
+    }
+}
